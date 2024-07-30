@@ -80,10 +80,11 @@ public class Maze {
         grid[end.row][end.column] = Cell.GOAL;
     }
 
+    // shortest way from a b point
     public double euclideanDistance(MazeLocation ml) {
-        int xdist = ml.column - end.column;
-        int ydist = ml.row - end.row;
-        return Math.sqrt((xdist * xdist) + (ydist * ydist));
+        int xDist = ml.column - end.column;
+        int yDist = ml.row - end.row;
+        return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
     }
 
     public double manhattanDistance(MazeLocation ml) {

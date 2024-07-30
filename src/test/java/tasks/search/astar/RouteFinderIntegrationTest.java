@@ -1,9 +1,7 @@
-package com.example.java_snippets;
+package tasks.search.astar;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tasks.search.astar.Graph;
-import tasks.search.astar.RouteFinder;
 import tasks.search.astar.underground.HaversineScorer;
 import tasks.search.astar.underground.Station;
 
@@ -425,7 +423,7 @@ class RouteFinderIntegrationTest {
         connections.put("96", Stream.of("194","286").collect(Collectors.toSet()));
         connections.put("97", Stream.of("19","65").collect(Collectors.toSet()));
         connections.put("98", Stream.of("173","210").collect(Collectors.toSet()));
-        connections.put("99", Stream.of("122","235","74","235","74","235").collect(Collectors.toSet()));
+        connections.put("99", Stream.of("122","235","74","235","235").collect(Collectors.toSet()));
         connections.put("100", Stream.of("34","111").collect(Collectors.toSet()));
         connections.put("101", Stream.of("110","226").collect(Collectors.toSet()));
         connections.put("102", Stream.of("258","276").collect(Collectors.toSet()));
@@ -640,5 +638,18 @@ class RouteFinderIntegrationTest {
         assertThat(route).size().isPositive();
 
         route.stream().map(Station::name).toList().forEach(station -> System.out.println(station));
+    }
+
+    @Test
+    void queueTest() {
+        Queue<Integer> queue = new PriorityQueue<>();
+        queue.add(5);
+        queue.add(3);
+        queue.add(1);
+        queue.add(4);
+        queue.add(2);
+        queue.poll();
+        System.out.println(queue);
+        assertThat(queue).size().isEqualTo(4);
     }
 }

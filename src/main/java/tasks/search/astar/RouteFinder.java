@@ -1,8 +1,12 @@
 package tasks.search.astar;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.*;
 
 public class RouteFinder<T extends GraphNode> {
+    private static final Logger log = LoggerFactory.getLogger(RouteFinder.class);
     private final Graph<T> graph;
     private final Scorer<T> nextNodeScorer;
     private final Scorer<T> targetScorer;
@@ -35,7 +39,9 @@ public class RouteFinder<T extends GraphNode> {
                 return routeByPoints.reversed();
             }
 
-            graph.getConnections(next.getCurrent()).forEach(connection -> {
+            Set<T> connections = graph.getConnections(next.getCurrent());
+            connections.forEach(connection -> {
+
                 double newScore = next.getRouteScore() + nextNodeScorer.computeCost(next.getCurrent(), connection);
                 RouteNode<T> nextNode = allNodes.getOrDefault(connection, new RouteNode<>(connection));
                 allNodes.put(connection, nextNode);
