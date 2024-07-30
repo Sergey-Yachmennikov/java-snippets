@@ -80,6 +80,18 @@ public class Maze {
         grid[end.row][end.column] = Cell.GOAL;
     }
 
+    public double euclideanDistance(MazeLocation ml) {
+        int xdist = ml.column - end.column;
+        int ydist = ml.row - end.row;
+        return Math.sqrt((xdist * xdist) + (ydist * ydist));
+    }
+
+    public double manhattanDistance(MazeLocation ml) {
+        int xdist = Math.abs(ml.column - end.column);
+        int ydist = Math.abs(ml.row - end.row);
+        return (xdist + ydist);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
