@@ -1,7 +1,6 @@
 package tasks.search.astar;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class RouteFinder<T extends GraphNode> {
     private final Graph<T> graph;
@@ -26,14 +25,14 @@ public class RouteFinder<T extends GraphNode> {
             RouteNode<T> next = openSet.poll();
             if (next.getCurrent().equals(to)) {
 
-                List<T> route = new ArrayList<>();
+                List<T> routeByPoints = new ArrayList<>();
                 RouteNode<T> current = next;
                 do {
-                    route.add(0, current.getCurrent());
+                    routeByPoints.add(current.getCurrent());
                     current = allNodes.get(current.getPrevious());
                 } while (current != null);
 
-                return route;
+                return routeByPoints.reversed();
             }
 
             graph.getConnections(next.getCurrent()).forEach(connection -> {

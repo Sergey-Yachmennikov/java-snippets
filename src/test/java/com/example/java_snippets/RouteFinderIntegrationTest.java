@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RouteFinderIntegrationTest {
 
-    private Graph<Station> underground;
+    private Graph<Station> undergroundGraph;
 
     private RouteFinder<Station> routeFinder;
 
@@ -490,7 +490,7 @@ class RouteFinderIntegrationTest {
         connections.put("161", Stream.of("25","44","25","44").collect(Collectors.toSet()));
         connections.put("162", Stream.of("28","149").collect(Collectors.toSet()));
         connections.put("163", Stream.of("11","82").collect(Collectors.toSet()));
-        connections.put("164", Stream.of("24","246","33","243","33","243").collect(Collectors.toSet()));
+        connections.put("164", Stream.of("24","246","33","243","33").collect(Collectors.toSet()));
         connections.put("165", Stream.of("93").collect(Collectors.toSet()));
         connections.put("166", Stream.of("44","262","44","262").collect(Collectors.toSet()));
         connections.put("167", Stream.of("14","156","14","156","14","156","13","188").collect(Collectors.toSet()));
@@ -616,27 +616,27 @@ class RouteFinderIntegrationTest {
         connections.put("287", Stream.of("93","301").collect(Collectors.toSet()));
         connections.put("288", Stream.of("36","199","36","199","43","246").collect(Collectors.toSet()));
         connections.put("289", Stream.of("94","142").collect(Collectors.toSet()));
-        connections.put("290", Stream.of("115","209").collect(Collectors.toSet()));
-        connections.put("291", Stream.of("42","200","283").collect(Collectors.toSet()));
-        connections.put("292", Stream.of("17","74").collect(Collectors.toSet()));
-        connections.put("293", Stream.of("220").collect(Collectors.toSet()));
-        connections.put("294", Stream.of("3","243","224","227","3","243").collect(Collectors.toSet()));
-        connections.put("295", Stream.of("76","225").collect(Collectors.toSet()));
-        connections.put("296", Stream.of("71","142").collect(Collectors.toSet()));
-        connections.put("297", Stream.of("113","137").collect(Collectors.toSet()));
-        connections.put("298", Stream.of("299").collect(Collectors.toSet()));
-        connections.put("299", Stream.of("230","298").collect(Collectors.toSet()));
-        connections.put("300", Stream.of("37","214","240").collect(Collectors.toSet()));
-        connections.put("301", Stream.of("260","287").collect(Collectors.toSet()));
-        connections.put("302", Stream.of("31","265").collect(Collectors.toSet()));
+        connections.put("290", Set.of("115","209"));
+        connections.put("291", Set.of("42","200","283"));
+        connections.put("292", Set.of("17","74"));
+        connections.put("293", Set.of("220"));
+        connections.put("294", Set.of("3","243","224","227"));
+        connections.put("295", Set.of("76","225"));
+        connections.put("296", Set.of("71","142"));
+        connections.put("297", Set.of("113","137"));
+        connections.put("298", Set.of("299"));
+        connections.put("299", Set.of("230","298"));
+        connections.put("300", Set.of("37","214","240"));
+        connections.put("301", Set.of("260","287"));
+        connections.put("302", Set.of("31","265"));
 
-        underground = new Graph<>(stations, connections);
-        routeFinder = new RouteFinder<>(underground, new HaversineScorer(), new HaversineScorer());
+        undergroundGraph = new Graph<>(stations, connections);
+        routeFinder = new RouteFinder<>(undergroundGraph, new HaversineScorer(), new HaversineScorer());
     }
 
     @Test
     void findRoute() {
-        List<Station> route = routeFinder.findRoute(underground.getNode("74"), underground.getNode("7"));
+        List<Station> route = routeFinder.findRoute(undergroundGraph.getNode("74"), undergroundGraph.getNode("7"));
         assertThat(route).size().isPositive();
 
         route.stream().map(Station::name).toList().forEach(station -> System.out.println(station));
