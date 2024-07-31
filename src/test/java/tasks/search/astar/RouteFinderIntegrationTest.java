@@ -651,5 +651,6 @@ class RouteFinderIntegrationTest {
         queue.poll();
         System.out.println(queue);
         assertThat(queue).size().isEqualTo(4);
+        assertThat(Queue.class.getSimpleName()).isEqualTo("Queue");
     }
 }

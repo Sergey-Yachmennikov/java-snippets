@@ -69,7 +69,7 @@ public class GenericSearch {
         // frontier — то, куда мы хотим двигаться
         PriorityQueue<Node<T>> frontier = new PriorityQueue<>();
         frontier.offer(new Node<>(initial, null, 0.0, heuristic.applyAsDouble(initial)));
-        // explored — то, что мы уже просмотрели
+        // explored — то, что мы уже просмотрели T = MazeLocation / cost
         Map<T, Double> explored = new HashMap<>();
         explored.put(initial, 0.0);
         // продолжаем, пока есть что просматривать
@@ -81,13 +81,14 @@ public class GenericSearch {
                 return currentNode;
             }
             // проверяем, в какую из неисследованных ячеек направиться
-            for (T child : successors.apply(currentState)) {
+            List<T> adjacentCells = successors.apply(currentState);
+            for (T cell : adjacentCells) {
                 // 1 — для сетки, для более сложных приложений
                 // здесь должна быть функция затрат
                 double newCost = currentNode.cost + 1;
-                if (!explored.containsKey(child) || explored.get(child) > newCost) {
-                    explored.put(child, newCost);
-                    frontier.offer(new Node<>(child, currentNode, newCost, heuristic.applyAsDouble(child)));
+                if (!explored.containsKey(cell) || explored.get(cell) > newCost) {
+                    explored.put(cell, newCost);
+                    frontier.offer(new Node<>(cell, currentNode, newCost, heuristic.applyAsDouble(cell)));
                 }
             }
         }
