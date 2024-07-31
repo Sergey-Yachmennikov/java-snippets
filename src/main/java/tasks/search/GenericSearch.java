@@ -66,7 +66,6 @@ public class GenericSearch {
     }
 
     public static <T> Node<T> astar(T initial, Predicate<T> goalTest, Function<T, List<T>> successors, ToDoubleFunction<T> heuristic) {
-        // frontier — то, куда мы хотим двигаться
         PriorityQueue<Node<T>> frontier = new PriorityQueue<>();
         frontier.offer(new Node<>(initial, null, 0.0, heuristic.applyAsDouble(initial)));
         // explored — то, что мы уже просмотрели T = MazeLocation / cost

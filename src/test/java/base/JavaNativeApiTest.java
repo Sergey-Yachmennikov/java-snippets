@@ -2,7 +2,9 @@ package base;
 
 import org.junit.jupiter.api.Test;
 import java.util.StringJoiner;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.*;
 
 class JavaNativeApiTest {
 
@@ -85,9 +87,37 @@ class JavaNativeApiTest {
     }
 
     /// test error handling
-//    @Test(expected = ClassCastException.class)
-//    public void givenCharSequenceAsStringBuiler_whenConvertingUsingCasting_thenThrowException() {
-//        CharSequence charSequence = new StringBuilder("baeldung");
-//        String castedString = (String) charSequence;
-//    }
+    @Test()
+    void givenCharSequenceAsStringBuiler_whenConvertingUsingCasting_thenThrowException() {
+        assertThrows(ClassCastException.class, this::doException);
+    }
+
+    @Test()
+    void givenCharSequenceAsStringBuiler_whenConvertingUsingCasting_thenThrowException2() {
+        assertThatThrownBy(this::doException).isInstanceOf(ClassCastException.class);
+    }
+
+    void doException() {
+        CharSequence charSequence = new StringBuilder("baeldung");
+        String castedString = (String) charSequence;
+    }
+
+    @Test
+    void whenExceptionThrown_thenAssertionSucceeds() {
+        Exception exception = assertThrows(NumberFormatException.class, () -> {
+            Integer.parseInt("1a");
+        });
+
+        String expectedMessage = "For input string";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void givenABlock_whenExecutes_thenEnsureNoExceptionThrown() {
+        assertDoesNotThrow(() -> {
+            Integer.parseInt("100");
+        });
+    }
 }
