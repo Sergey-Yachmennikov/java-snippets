@@ -648,8 +648,10 @@ class RouteFinderIntegrationTest {
         queue.add(1);
         queue.add(4);
         queue.add(2);
-        queue.poll();
+        Integer value = queue.poll();
         System.out.println(queue);
+        assert value != null;
+        assertThat(value.intValue()).isEqualTo(1);
         assertThat(queue).size().isEqualTo(4);
         assertThat(Queue.class.getSimpleName()).isEqualTo("Queue");
     }
