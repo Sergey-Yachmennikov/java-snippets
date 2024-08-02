@@ -46,4 +46,29 @@ class CSPTest {
                 solution.toString()
         );
     }
+
+    @Test
+    void eightQueensTaskTest() {
+        List<Integer> columns = List.of(1, 2, 3, 4, 5, 6, 7, 8);
+        Map<Integer, List<Integer>> rows = new HashMap<>();
+
+        for (int column : columns) {
+            rows.put(column, List.of(1, 2, 3, 4, 5, 6, 7, 8));
+        }
+
+        CSP<Integer, Integer> csp = new CSP<>(columns, rows);
+        csp.addConstraint(new QueensConstraint(columns));
+        Map<Integer, Integer> solution = csp.backtrackingSearch();
+        if (solution == null) {
+            System.out.println("No solution found!");
+        } else {
+            System.out.println(solution);
+        }
+
+        assert solution != null;
+        assertEquals(
+                "{1=1, 2=5, 3=8, 4=6, 5=3, 6=7, 7=2, 8=4}",
+                solution.toString()
+        );
+    }
 }
