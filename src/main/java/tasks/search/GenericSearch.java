@@ -58,6 +58,7 @@ public class GenericSearch {
                 if (explored.contains(child)) {
                     continue; // пропустить состояния, которые уже исследовали
                 }
+
                 explored.add(child);
                 frontier.offer(new Node<>(child, currentNode));
             }
