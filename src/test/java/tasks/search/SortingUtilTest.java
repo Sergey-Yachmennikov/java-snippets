@@ -18,4 +18,10 @@ class SortingUtilTest {
         SortingUtil.bubbleSort(array);
         System.out.println(Arrays.toString(array));
     }
+
+    @Test
+    void selectionSortTest() {
+        SortingUtil.selectionSort(array);
+        System.out.println(Arrays.toString(array));
+    }
 }
