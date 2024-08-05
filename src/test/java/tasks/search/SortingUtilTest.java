@@ -24,4 +24,10 @@ class SortingUtilTest {
         SortingUtil.selectionSort(array);
         System.out.println(Arrays.toString(array));
     }
+
+    @Test
+    void quickSortTest() {
+        SortingUtil.quickSort(array, 0, array.length - 1);
+        System.out.println(Arrays.toString(array));
+    }
 }

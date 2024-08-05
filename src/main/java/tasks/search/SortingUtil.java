@@ -22,6 +22,40 @@ public class SortingUtil {
         }
     }
 
+    public static void quickSort(int[] array, int from, int to) {
+        if (from < to) {
+            int middleIndex = partition(array, from ,to);
+            quickSort(array, from, middleIndex - 1);
+            quickSort(array, middleIndex, to);
+        }
+    }
+
+    private static int partition(int[] array, int from, int to) {
+        int leftIndex = from;
+        int rightIndex = to;
+        int pivot = array[from];
+
+        while (leftIndex <= rightIndex) {
+
+            while (array[leftIndex] < pivot) {
+                leftIndex++;
+            }
+
+            while (array[rightIndex] > pivot) {
+                rightIndex--;
+            }
+
+            if (leftIndex <= rightIndex) {
+                swap(array, leftIndex, rightIndex);
+                leftIndex++;
+                rightIndex--;
+            }
+
+        }
+
+        return leftIndex;
+    }
+
     private static int min(int[] array, int startIndex) {
         int minElement = array[startIndex];
         int minIndex = startIndex;
