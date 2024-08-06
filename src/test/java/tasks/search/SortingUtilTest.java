@@ -36,4 +36,10 @@ class SortingUtilTest {
         SortingUtil.mergeSort(array);
         System.out.println(Arrays.toString(array));
     }
+
+    @Test
+    void countingSortTest() {
+        SortingUtil.countingSort(array, Arrays.stream(array).max().orElse(0));
+        System.out.println(Arrays.toString(array));
+    }
 }

@@ -38,7 +38,7 @@ public class SortingUtil {
               currentSrc = array,
               currentDest = new int[array.length];
 
-        int size = 1;
+        int size = 1; // size of merge arrays
         while (size < array.length) {
 
             for (int i = 0; i < array.length; i += 2 * size) {
@@ -49,6 +49,22 @@ public class SortingUtil {
             currentSrc = currentDest;
             currentDest = temp;
             size = size * 2;
+        }
+    }
+
+    public static void countingSort(int[] array, final int maxValue) { //
+        int[] count = new int[maxValue + 1];
+
+        for (int value : array) {
+            count[value] += 1;
+        }
+
+        int arrayIndex = 0;
+        for (int i = 0; i < count.length; i++) {
+            for (int j = 0; j < count[i]; j++) {
+                array[arrayIndex] = i;
+                arrayIndex++;
+            }
         }
     }
 
