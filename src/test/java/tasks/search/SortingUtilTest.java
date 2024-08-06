@@ -48,4 +48,10 @@ class SortingUtilTest {
         SortingUtil.insertionSort(array);
         System.out.println(Arrays.toString(array));
     }
+
+    @Test
+    void combSortTest() {
+        SortingUtil.combSort(array);
+        System.out.println(Arrays.toString(array));
+    }
 }

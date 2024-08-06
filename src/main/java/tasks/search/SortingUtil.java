@@ -82,6 +82,23 @@ public class SortingUtil {
         }
     }
 
+    public static void combSort(int[] array) {
+        int gap = array.length;
+        boolean isSorted = false;
+        while (!isSorted || gap != 1) {
+
+            gap = gap > 1 ? gap * 10 / 13 : 1;
+            isSorted = true;
+
+            for (int i = gap; i < array.length; i++) {
+                if (array[i] < array[i - gap]) {
+                    swap(array, i, i - gap);
+                    isSorted = false;
+                }
+            }
+        }
+    }
+
     // internal part
     private static int partition(int[] array, int from, int to) {
         int leftIndex = from;
