@@ -30,4 +30,10 @@ class SortingUtilTest {
         SortingUtil.quickSort(array, 0, array.length - 1);
         System.out.println(Arrays.toString(array));
     }
+
+    @Test
+    void mergeSortTest() {
+        SortingUtil.mergeSort(array);
+        System.out.println(Arrays.toString(array));
+    }
 }

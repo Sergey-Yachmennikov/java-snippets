@@ -2,6 +2,9 @@ package tasks.search;
 
 public class SortingUtil {
 
+    private SortingUtil() {}
+
+    // public API
     public static void bubbleSort(int[] array) {
         boolean isSorted = false;
         while (!isSorted) {
@@ -30,6 +33,26 @@ public class SortingUtil {
         }
     }
 
+    public static void mergeSort(int[] array) {
+        int[] temp,
+              currentSrc = array,
+              currentDest = new int[array.length];
+
+        int size = 1;
+        while (size < array.length) {
+
+            for (int i = 0; i < array.length; i += 2 * size) {
+                merge(currentSrc, i, currentSrc, i + size, currentDest, i, size);
+            }
+
+            temp = currentSrc;
+            currentSrc = currentDest;
+            currentDest = temp;
+            size = size * 2;
+        }
+    }
+
+    // internal part
     private static int partition(int[] array, int from, int to) {
         int leftIndex = from;
         int rightIndex = to;
@@ -50,10 +73,27 @@ public class SortingUtil {
                 leftIndex++;
                 rightIndex--;
             }
-
         }
 
         return leftIndex;
+    }
+
+    private static void merge(int[] src1, int src1Start, int[] src2, int src2Start, int[] dest, int destStart, int size) {
+        int index1 = src1Start,
+            index2 = src2Start,
+            src1End = Math.min(src1Start + size, src1.length),
+            src2End = Math.min(src2Start + size, src2.length),
+            iterationCount = src1End - src1Start + src2End - src2Start;
+
+        for (int i = destStart; i < destStart + iterationCount; i++) {
+            if (index1 < src1End && (index2 >= src2End || src1[index1] < src2[index2])) {
+                dest[i] = src1[index1];
+                index1++;
+            } else {
+                dest[i] = src2[index2];
+                index2++;
+            }
+        }
     }
 
     private static int min(int[] array, int startIndex) {
