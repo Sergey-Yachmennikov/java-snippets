@@ -68,6 +68,20 @@ public class SortingUtil {
         }
     }
 
+    public static void insertionSort(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            int current = array[i];
+            int j = i;
+
+            while (j > 0 && array[j - 1] > current) {
+                array[j] = array[j - 1];
+                j--;
+            }
+
+            array[j] = current;
+        }
+    }
+
     // internal part
     private static int partition(int[] array, int from, int to) {
         int leftIndex = from;

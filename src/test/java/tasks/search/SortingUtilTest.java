@@ -42,4 +42,10 @@ class SortingUtilTest {
         SortingUtil.countingSort(array, Arrays.stream(array).max().orElse(0));
         System.out.println(Arrays.toString(array));
     }
+
+    @Test
+    void insertionSortTest() {
+        SortingUtil.insertionSort(array);
+        System.out.println(Arrays.toString(array));
+    }
 }
