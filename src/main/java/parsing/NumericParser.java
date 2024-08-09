@@ -5,7 +5,7 @@ import java.util.List;
 
 public class NumericParser {
 
-    public enum LexemeType {
+    private enum LexemeType {
         LEFT_BRACKET,
         RIGHT_BRACKET,
         OP_PLUS,
@@ -16,7 +16,7 @@ public class NumericParser {
         EOF
     }
 
-    public static class Lexeme {
+    private static class Lexeme {
         LexemeType type;
         String value;
 
@@ -39,7 +39,7 @@ public class NumericParser {
         }
     }
 
-    public static class LexemeBuffer {
+    private static class LexemeBuffer {
         private int pos;
         public List<Lexeme> lexemes;
 
@@ -60,7 +60,7 @@ public class NumericParser {
         }
     }
 
-    public static List<Lexeme> lexAnalyze(String expText) {
+    private static List<Lexeme> lexicalAnalysis(String expText) {
         List<Lexeme> lexemes = new ArrayList<>();
         int pos = 0;
         while (pos < expText.length()) {
@@ -117,7 +117,13 @@ public class NumericParser {
         return lexemes;
     }
 
-    public static int expr(LexemeBuffer lexemes) {
+    public static int calculate(String expText) {
+        List<Lexeme> lexemes = lexicalAnalysis(expText);
+        LexemeBuffer buffer = new LexemeBuffer(lexemes);
+        return expr(buffer);
+    }
+
+    private static int expr(LexemeBuffer lexemes) {
         Lexeme lexeme = lexemes.next();
         if (lexeme.type == LexemeType.EOF) {
             return 0;
@@ -127,7 +133,7 @@ public class NumericParser {
         }
     }
 
-    public static int plusminus(LexemeBuffer lexemes) {
+    private static int plusminus(LexemeBuffer lexemes) {
         int value = miltdiv(lexemes);
         while (true) {
             Lexeme lexeme = lexemes.next();
@@ -142,7 +148,7 @@ public class NumericParser {
         }
     }
 
-    public static int miltdiv(LexemeBuffer lexemes) {
+    private static int miltdiv(LexemeBuffer lexemes) {
         int value = factor(lexemes);
         while (true) {
             Lexeme lexeme = lexemes.next();
@@ -157,7 +163,7 @@ public class NumericParser {
         }
     }
 
-    public static int factor(LexemeBuffer lexemes) {
+    private static int factor(LexemeBuffer lexemes) {
         Lexeme lexeme = lexemes.next();
         switch (lexeme.type) {
             case NUMBER -> {
