@@ -16,3 +16,6 @@ public class PiCalculator {
         return pi;
     }
 }
+
+// prime number - divides only by itself or 1 (RSA implemented base on prime numbers)
+// composite number - all other
