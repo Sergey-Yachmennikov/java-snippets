@@ -1,4 +1,4 @@
-package tasks.search;
+package sorting;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

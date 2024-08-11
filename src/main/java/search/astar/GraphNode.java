@@ -1,4 +1,4 @@
-package tasks.search.astar;
+package search.astar;
 
 public interface GraphNode {
     String id();

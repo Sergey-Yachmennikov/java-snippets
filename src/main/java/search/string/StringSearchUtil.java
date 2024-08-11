@@ -1,4 +1,4 @@
-package tasks.search.string;
+package search.string;
 
 import java.util.ArrayList;
 

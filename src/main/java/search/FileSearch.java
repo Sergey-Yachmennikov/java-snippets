@@ -1,4 +1,4 @@
-package tasks.search;
+package search;
 
 import java.io.File;
 import java.util.List;

@@ -1,4 +1,4 @@
-package tasks.search;
+package sorting;
 
 public class SortingUtil {
 

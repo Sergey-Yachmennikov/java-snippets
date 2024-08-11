@@ -1,6 +1,6 @@
-package tasks.search.astar.underground;
+package search.astar.underground;
 
-import tasks.search.astar.Scorer;
+import search.astar.Scorer;
 
 
 public class HaversineScorer implements Scorer<Station> {

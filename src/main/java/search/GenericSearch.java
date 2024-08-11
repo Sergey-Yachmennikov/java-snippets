@@ -1,4 +1,4 @@
-package tasks.search;
+package search;
 
 import java.util.*;
 import java.util.function.Function;

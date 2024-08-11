@@ -1,9 +1,9 @@
-package tasks.search.astar;
+package search.astar;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tasks.search.astar.underground.HaversineScorer;
-import tasks.search.astar.underground.Station;
+import search.astar.underground.HaversineScorer;
+import search.astar.underground.Station;
 
 import java.util.*;
 import java.util.stream.Collectors;

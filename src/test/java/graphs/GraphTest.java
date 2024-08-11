@@ -1,7 +1,7 @@
 package graphs;
 
 import org.junit.jupiter.api.Test;
-import tasks.search.GenericSearch;
+import search.GenericSearch;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package tasks.search.astar;
+package search.astar;
 
 import java.util.Map;
 import java.util.Set;

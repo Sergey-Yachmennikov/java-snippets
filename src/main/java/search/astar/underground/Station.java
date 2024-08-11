@@ -1,6 +1,6 @@
-package tasks.search.astar.underground;
+package search.astar.underground;
 
-import tasks.search.astar.GraphNode;
+import search.astar.GraphNode;
 
 import java.util.StringJoiner;
 

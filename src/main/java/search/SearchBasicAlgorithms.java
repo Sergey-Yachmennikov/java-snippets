@@ -1,4 +1,4 @@
-package tasks.search;
+package search;
 
 public class SearchBasicAlgorithms {
 
