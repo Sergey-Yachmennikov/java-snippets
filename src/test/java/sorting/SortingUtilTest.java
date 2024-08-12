@@ -54,4 +54,11 @@ class SortingUtilTest {
         SortingUtil.combSort(array);
         System.out.println(Arrays.toString(array));
     }
+
+    // shellSort
+    @Test
+    void shellSortTest() {
+        SortingUtil.shellSort(array);
+        System.out.println(Arrays.toString(array));
+    }
 }
