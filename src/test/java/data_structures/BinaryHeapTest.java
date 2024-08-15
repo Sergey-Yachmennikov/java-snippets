@@ -31,15 +31,34 @@ class BinaryHeapTest {
 
     @Test
     void BinaryHeap2Test() {
-        BinaryHeap2<Integer> bh = new BinaryHeap2<>(10);
+        BinaryHeap2<Integer> bh = new BinaryHeap2<>();
         // Insert elements into the heap
         bh.insert(10);
         bh.insert(5);
         bh.insert(30);
         bh.insert(3);
         bh.insert(8);
+        bh.insert(4);
+        bh.insert(2);
+        bh.insert(1);
+        bh.insert(40);
 
         System.out.println(bh);
+//
+        bh.deleteMax();
+        System.out.println(bh);
+//
+//        bh.deleteMax();
+//        System.out.println(bh);
+//
+//        bh.deleteMax();
+//        System.out.println(bh);
+//
+//        bh.deleteMax();
+//        System.out.println(bh);
+//
+//        bh.deleteMax();
+//        System.out.println(bh);
     }
 
 }

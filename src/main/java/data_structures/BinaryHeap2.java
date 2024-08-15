@@ -12,12 +12,6 @@ public class BinaryHeap2<T extends Comparable<T>> {
         list = (T[]) new Comparable[capacity + 1];
     }
 
-    @SuppressWarnings("unchecked")
-    public BinaryHeap2(int capacity) {
-        this.capacity = capacity;
-        list = (T[]) new Comparable[capacity + 1];
-    }
-
     public boolean isEmpty() {
         return elementsCount == 0;
     }
@@ -27,15 +21,21 @@ public class BinaryHeap2<T extends Comparable<T>> {
     }
 
     public void insert(T v) {
+        if (capacity == elementsCount) resize();
         list[++elementsCount] = v;
         swim(elementsCount);
+    }
+
+    private void resize() {
+        capacity *= 2;
+        list = Arrays.copyOf(list, capacity + 1);
     }
 
     public T deleteMax() {
         T max = list[1];
         swap(1, elementsCount--);
         list[elementsCount + 1] = null;
-        sink(1);
+        sink();
 
         return max;
     }
@@ -51,15 +51,16 @@ public class BinaryHeap2<T extends Comparable<T>> {
     }
 
     // move up
-    private void swim(int k) {
-        while (k > 1 && lessThen(k / 2, k)) {
-            swap(k / 2, k);
-            k = k / 2;
+    private void swim(int index) {
+        while (index > 1 && lessThen(index / 2, index)) {
+            swap(index / 2, index);
+            index = index / 2;
         }
     }
 
     // move down
-    private void sink(int k) {
+    private void sink() {
+        int k = 1;
         while (k * 2 < elementsCount) {
             int j = k * 2;
             if (j < elementsCount && lessThen(j, j + 1)) j++;
