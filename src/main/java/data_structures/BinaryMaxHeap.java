@@ -56,17 +56,17 @@ public class BinaryMaxHeap {
         }
     }
 
-    public void percolateUp(int index) {
-        int temp = heap[index];
-        int parent = parentIndex(index);
+    public void percolateUp(int currentIndex) {
+        int currentValue = heap[currentIndex];
+        int parentInx = parentIndex(currentIndex);
 
-        while (index > 0 && heap[parent] < temp) {
-            heap[index] = heap[parent];
-            index = parent;
-            parent = parentIndex(index);
+        while (currentIndex > 0 && heap[parentInx] < currentValue) {
+            heap[currentIndex] = heap[parentInx];
+            currentIndex = parentInx;
+            parentInx = parentIndex(currentIndex); // move to next parent
         }
 
-        heap[index] = temp;
+        heap[currentIndex] = currentValue;
     }
 
     public int remove() {
