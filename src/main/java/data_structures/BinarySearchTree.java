@@ -1,5 +1,6 @@
 package data_structures;
 
+
 public class BinarySearchTree<K extends Comparable<K>, V> {
     private Node<K, V> root;
 
@@ -133,6 +134,10 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 
         node.N = size(node.left) + size(node.right) + 1;
         return node;
+    }
+
+    public void print() {
+        print(root);
     }
 
     private void print(Node<K, V> node) {
