@@ -47,18 +47,6 @@ class BinaryHeapTest {
 //
         bh.deleteMax();
         System.out.println(bh);
-//
-//        bh.deleteMax();
-//        System.out.println(bh);
-//
-//        bh.deleteMax();
-//        System.out.println(bh);
-//
-//        bh.deleteMax();
-//        System.out.println(bh);
-//
-//        bh.deleteMax();
-//        System.out.println(bh);
     }
 
 }
