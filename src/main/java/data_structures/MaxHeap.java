@@ -81,6 +81,7 @@ public class MaxHeap {
     public int poll() {
         int popped = heap[1];
         heap[1] = heap[size--];
+        heap[size + 1] = 0;
         maxHeapify(1);
         return popped;
     }

@@ -28,6 +28,7 @@ class MaxHeapTest {
         assertEquals(16, maxHeap.poll());
         assertEquals(15, maxHeap.poll());
         assertEquals(13, maxHeap.poll());
+        System.out.println(maxHeap);
     }
 
 }
