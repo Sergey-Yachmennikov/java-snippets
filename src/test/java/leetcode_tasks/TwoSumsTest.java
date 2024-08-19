@@ -12,6 +12,6 @@ class TwoSumsTest {
     void twoSums() {
         TwoSums ts = new TwoSums();
         int[] sums = ts.twoSums(new int[]{2, 7, 11, 15}, 9);
-        System.out.println(Arrays.toString(sums));
+        assertArrayEquals(new int[]{1, 2}, sums);
     }
 }
