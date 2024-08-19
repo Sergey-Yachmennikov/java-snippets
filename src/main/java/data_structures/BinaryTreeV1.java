@@ -1,9 +1,8 @@
 package data_structures;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import basic_data_structures.SimpleStack;
+
+import java.util.*;
 
 public class BinaryTreeV1 {
     private Node root;
@@ -18,6 +17,12 @@ public class BinaryTreeV1 {
             right = null;
             left = null;
         }
+    }
+
+    public int getRootValue() {
+        System.out.println(root.left.value);
+        System.out.println(root.right.value);
+        return root.value;
     }
 
     public boolean isEmpty() {
@@ -189,6 +194,26 @@ public class BinaryTreeV1 {
             if (node.right != null) {
                 nodes.add(node.right);
             }
+        }
+
+        return list;
+    }
+
+
+    public List<Integer> traverseInOrderIterative() {
+        List<Integer> list = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+        Node current = root;
+
+        while (current != null || !stack.isEmpty()) {
+            while (current != null) {
+                stack.push(current);
+                current = current.left;
+            }
+
+            Node top = stack.pop();
+            list.add(top.value);
+            current = top.right;
         }
 
         return list;

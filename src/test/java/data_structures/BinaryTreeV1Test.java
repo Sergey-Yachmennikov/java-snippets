@@ -1,6 +1,5 @@
 package data_structures;
 
-import net.minidev.json.JSONUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,14 +18,15 @@ class BinaryTreeV1Test {
         bt.add(7);
         bt.add(9);
 
-        assertTrue(bt.containsNode(7));
-        assertEquals(3, bt.findSmallestValue());
+         assertTrue(bt.containsNode(7));
+         assertEquals(3, bt.findSmallestValue());
 
         System.out.println(bt.traverseInOrder());
         System.out.println(bt.traversePreOrder());
         System.out.println(bt.traversePostOrder());
         System.out.println(bt.traverseInOrderReversed());
         System.out.println(bt.traverseLevelOrder());
+        System.out.println(bt.traverseInOrderIterative());
 
         bt.delete(5);
         assertFalse(bt.containsNode(5));
