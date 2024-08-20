@@ -1,7 +1,5 @@
 package data_structures;
 
-import basic_data_structures.SimpleStack;
-
 import java.util.*;
 
 public class BinaryTreeV1 {
@@ -20,8 +18,6 @@ public class BinaryTreeV1 {
     }
 
     public int getRootValue() {
-        System.out.println(root.left.value);
-        System.out.println(root.right.value);
         return root.value;
     }
 
@@ -214,6 +210,36 @@ public class BinaryTreeV1 {
             Node top = stack.pop();
             list.add(top.value);
             current = top.right;
+        }
+
+        return list;
+    }
+
+    public List<Integer> traversePostOrderIterative() {
+        List<Integer> list = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+        Node prev = root;
+        Node current;
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            current = stack.peek();
+            boolean hasChild = (current.left != null || current.right != null);
+            boolean isPrevLastChild = (prev == current.right ||
+                    (prev == current.left && current.right == null));
+
+            if (!hasChild || isPrevLastChild) {
+                current = stack.pop();
+                list.add(current.value);
+                prev = current;
+            } else {
+                if (current.right != null) {
+                    stack.push(current.right);
+                }
+                if (current.left != null) {
+                    stack.push(current.left);
+                }
+            }
         }
 
         return list;
