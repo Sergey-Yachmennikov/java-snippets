@@ -195,7 +195,6 @@ public class BinaryTreeV1 {
         return list;
     }
 
-
     public List<Integer> traverseInOrderIterative() {
         List<Integer> list = new ArrayList<>();
         Stack<Node> stack = new Stack<>();
@@ -259,5 +258,36 @@ public class BinaryTreeV1 {
         node.right = left;
 
         return node;
+    }
+
+    public int getDepth() {
+        if (root == null) return 0;
+        return getDepth(root);
+    }
+
+    private int getDepth(Node node) {
+        int leftDepth = 1;
+        int rightDepth = 1;
+
+        if (node.left != null) {
+            leftDepth += getDepth(node.left);
+        }
+
+        if (node.right != null) {
+            rightDepth += getDepth(node.right);
+        }
+
+        return Math.max(leftDepth, rightDepth);
+    }
+
+    public boolean hasPathSum(int sum) {
+        if (root == null) return false;
+        return hasPathSum(root, sum);
+    }
+
+    private boolean hasPathSum(Node node, int sum) {
+        if (node == null) return false;
+        if (node.left == null && node.right == null && node.value == sum) return true;
+        return hasPathSum(node.left, sum - node.value) || hasPathSum(node.right, sum - node.value);
     }
 }

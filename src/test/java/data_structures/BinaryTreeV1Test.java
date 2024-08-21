@@ -35,4 +35,33 @@ class BinaryTreeV1Test {
         assertFalse(bt.containsNode(5));
     }
 
+    @Test
+    void getDepth() {
+        BinaryTreeV1 bt = new BinaryTreeV1();
+
+        bt.add(6);
+        bt.add(4);
+        bt.add(8);
+        bt.add(3);
+        bt.add(5);
+        bt.add(7);
+        bt.add(9);
+        assertEquals(3, bt.getDepth());
+        bt.add(1);
+        assertEquals(4, bt.getDepth());
+    }
+
+    @Test
+    void pathSum() {
+        BinaryTreeV1 bt = new BinaryTreeV1();
+        bt.add(6);
+        bt.add(4);
+        bt.add(8);
+        bt.add(3);
+        bt.add(5);
+        bt.add(7);
+        bt.add(9);
+        assertTrue(bt.hasPathSum(13));
+    }
+
 }
