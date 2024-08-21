@@ -28,6 +28,8 @@ class BinaryTreeV1Test {
         System.out.println(bt.traverseLevelOrder());
         System.out.println(bt.traverseInOrderIterative());
         System.out.println(bt.traversePostOrderIterative());
+        bt.invertTree();
+        System.out.println(bt.traverseInOrder());
 
         bt.delete(5);
         assertFalse(bt.containsNode(5));

@@ -244,4 +244,20 @@ public class BinaryTreeV1 {
 
         return list;
     }
+
+    public void invertTree() {
+        root = invertTree(root);
+    }
+
+    private Node invertTree(Node node) {
+        if (node == null) return null;
+
+        Node left = invertTree(node.left);
+        Node right = invertTree(node.right);
+
+        node.left = right;
+        node.right = left;
+
+        return node;
+    }
 }
