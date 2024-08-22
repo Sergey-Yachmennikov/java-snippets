@@ -2,6 +2,9 @@ package string;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,5 +31,17 @@ class StringUtilTest {
     }
 
 
+    @Test
+    void charsTest() {
+        String temp = "dickness";
+        IntStream chars = temp.chars();
+
+        String collected = chars
+                .mapToObj(v -> String.valueOf((char) (v - 32)))
+                .collect(Collectors.joining());
+
+        assertEquals("DICKNESS", collected);
+
+    }
 
 }
