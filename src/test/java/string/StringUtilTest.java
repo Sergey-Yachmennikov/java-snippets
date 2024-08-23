@@ -44,4 +44,9 @@ class StringUtilTest {
 
     }
 
+    @Test
+    void messageFormat() {
+        assertEquals("At 12:00:00 AM on Jan 1, 1901, there was a disturbance in the Force on planet 7.", StringUtil.messageFormat());
+        assertEquals("The disk \"MyDisk\" contains 1,273 file(s).", StringUtil.messageFormat2());
+    }
 }
