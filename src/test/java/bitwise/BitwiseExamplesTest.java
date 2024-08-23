@@ -45,4 +45,16 @@ class BitwiseExamplesTest {
         int color = alpha << 24 | r << 16 | g << 8 | b;
         System.out.println(Integer.toBinaryString(color));
     }
+
+    @Test
+    void binaryIntegerTest() {
+        BitwiseExamples.binaryInteger();
+    }
+
+    @Test
+    void shiftAndEqualsTest() {
+        int a = 0b00001000;
+        a >>= 1;
+        assertEquals(4, a);
+    }
 }
