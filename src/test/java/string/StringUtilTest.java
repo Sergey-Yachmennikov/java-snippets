@@ -86,4 +86,28 @@ class StringUtilTest {
         assertNotSame(s3, s4); // intern doesn't work for String constructor
         assertTrue(s1 == s2 && s1 == s22 && s2 == s22);
     }
+
+    @Test
+    void substring() {
+        assertEquals("cdef", StringUtil.substring());
+    }
+
+    @Test
+    void subSequence() {
+        assertEquals("cdef", StringUtil.subSequence());
+    }
+
+    @Test
+    void whenReplaceOldCharNewChar_thenCorrect() {
+        String s = "welcome to baeldung";
+        assertEquals("welcome-to-baeldung", s.replace(' ', '-')); // replace only one char
+    }
+
+    @Test
+    void whenReplaceAll_thenCorrect() {
+        String s = "my url with spaces";
+        String s2 = "my  url with    spaces";
+        assertEquals("your url with spaces", s.replaceAll("my", "your"));
+        assertEquals("my-url-with-spaces", s2.replaceAll("\\s+", "-"));
+    }
 }

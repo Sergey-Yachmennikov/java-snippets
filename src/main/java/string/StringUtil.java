@@ -56,4 +56,14 @@ public class StringUtil {
         String temp = "abcd";
         return temp.codePointAt(0);
     }
+
+    public static String substring() {
+        String temp = "abcdef";
+        return temp.substring(2);
+    }
+
+    public static CharSequence subSequence() {
+        String temp = "abcdef";
+        return temp.subSequence(2, temp.length());
+    }
 }
