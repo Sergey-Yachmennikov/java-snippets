@@ -21,6 +21,7 @@ public class StringUtil {
         return sb.toString();
     }
 
+    @SuppressWarnings("deprecation")
     public static String messageFormat() {
         int planet = 7;
         Date date = new Date(1, Calendar.JANUARY,1);
@@ -39,5 +40,20 @@ public class StringUtil {
         MessageFormat form = new MessageFormat("The disk \"{1}\" contains {0} file(s).");
 
         return form.format(testArgs);
+    }
+
+    public static int[] codePoints() {
+        String temp = "abcd";
+        return temp.codePoints().toArray(); // unicode codes of symbol
+    }
+
+    public static int codePointCount() {
+        String temp = "abcd";
+        return temp.codePointCount(0, 3);
+    }
+
+    public static int codePointAt() {
+        String temp = "abcd";
+        return temp.codePointAt(0);
     }
 }
