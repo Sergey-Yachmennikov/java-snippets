@@ -1,5 +1,8 @@
 package leetcode_tasks;
 
+/**
+ * @topic Arrays
+ */
 public class RotateArray {
 
     private RotateArray() {}

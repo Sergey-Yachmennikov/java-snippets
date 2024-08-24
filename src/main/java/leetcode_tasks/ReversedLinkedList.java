@@ -2,6 +2,9 @@ package leetcode_tasks;
 
 import java.util.List;
 
+/**
+ * @topic List
+ */
 public class ReversedLinkedList {
 
     private ReversedLinkedList() {}

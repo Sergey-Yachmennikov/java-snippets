@@ -1,5 +1,8 @@
 package leetcode_tasks;
 
+/**
+ * @topic Numbers
+ */
 public class NumberPalindrome {
 
     private NumberPalindrome() {}
