@@ -12,11 +12,9 @@ public class SearchBasicAlgorithms {
                 return middleIndex; // base case
             }
 
-            if (array[middleIndex] > elementToFind) {
-                return binarySearchRecursive(array, startIndex, middleIndex - 1, elementToFind);
-            } else {
-                return binarySearchRecursive(array, middleIndex + 1, endIndex, elementToFind);
-            }
+            return array[middleIndex] > elementToFind
+                ? binarySearchRecursive(array, startIndex, middleIndex - 1, elementToFind)
+                : binarySearchRecursive(array, middleIndex + 1, endIndex, elementToFind);
         }
 
         return  -1;
