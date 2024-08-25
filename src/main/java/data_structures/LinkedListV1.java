@@ -31,7 +31,7 @@ public class LinkedListV1<T> {
         return tail;
     }
 
-    public void add(T value) {
+    public LinkedListV1<T> add(T value) {
         if (head == null) {
             head = new Node<>(value);
         } else {
@@ -47,6 +47,7 @@ public class LinkedListV1<T> {
         }
 
         size++;
+        return this;
     }
 
     public int size() {
