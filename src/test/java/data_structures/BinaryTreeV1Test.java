@@ -64,4 +64,21 @@ class BinaryTreeV1Test {
         assertTrue(bt.hasPathSum(13));
     }
 
+    @Test
+    void deleteNodeWithTwpChildren() {
+        BinaryTreeV1 bt = new BinaryTreeV1();
+
+        bt.add(6);
+        bt.add(4);
+        bt.add(8);
+        bt.add(3);
+        bt.add(5);
+        bt.add(7);
+        bt.add(9);
+
+        bt.delete(4);
+        bt.delete(8);
+        System.out.println(bt.traverseInOrder());
+    }
+
 }

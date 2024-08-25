@@ -77,12 +77,14 @@ public class BinaryTreeV1 {
 
     private Node deleteRecursive(Node current, int value) {
 
+        // no element case
         if (current == null) {
             return null;
         }
 
+        // target element = deleting value case
         if (value == current.value) {
-            // Case 1: no children
+            //  1: no children
             if (current.left == null && current.right == null) {
                 return null;
             }
@@ -103,12 +105,13 @@ public class BinaryTreeV1 {
             return current;
         }
 
+        // recursive case where there are some element count
         if (value < current.value) {
             current.left = deleteRecursive(current.left, value);
-            return current;
+        } else {
+            current.right = deleteRecursive(current.right, value);
         }
 
-        current.right = deleteRecursive(current.right, value);
         return current;
     }
 
