@@ -3,9 +3,7 @@ package patterns.builder;
 public class Post {
 
     private final String title;
-
     private final String text;
-
     private final String category;
 
     private Post(Builder builder) {
