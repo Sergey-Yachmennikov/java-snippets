@@ -18,4 +18,17 @@ class PostTest {
         assertEquals("Explaining how to implement the Builder Pattern in Java", post.getText());
         assertEquals("Programming", post.getCategory());
     }
+
+    @Test
+    void genericBuilderTest() {
+        GenericPost post = GenericBuilder.of(GenericPost::new)
+                .with(GenericPost::setTitle, "Java Builder Pattern")
+                .with(GenericPost::setText, "Explaining how to implement the Builder Pattern in Java")
+                .with(GenericPost::setCategory, "Programming")
+                .build();
+
+        assertEquals("Java Builder Pattern", post.getTitle());
+        assertEquals("Explaining how to implement the Builder Pattern in Java", post.getText());
+        assertEquals("Programming", post.getCategory());
+    }
 }
