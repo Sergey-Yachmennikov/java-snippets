@@ -655,4 +655,16 @@ class RouteFinderIntegrationTest {
         assertThat(queue).size().isEqualTo(4);
         assertThat(Queue.class.getSimpleName()).isEqualTo("Queue");
     }
+
+    @Test
+    void queueRemoveTest() {
+        Queue<Integer> queue = new PriorityQueue<>();
+        queue.add(5);
+        queue.add(3);
+        queue.add(1);
+        queue.add(4);
+        queue.add(2);
+        Integer removed = queue.remove();
+        assertThat(removed.equals(1));
+    }
 }
