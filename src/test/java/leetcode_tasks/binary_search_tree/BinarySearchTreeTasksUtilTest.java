@@ -22,10 +22,7 @@ class BinarySearchTreeTasksUtilTest {
         assertTrue(BinarySearchTreeTasksUtil.findSumOfTwo(root, 9));
     }
 
-    @Test
-    void generateTrees() {
-        System.out.println(BinarySearchTreeTasksUtil.generateTrees(3).toString()); // difficult
-    }
+
 
     @Test
     void isValidBST() {
