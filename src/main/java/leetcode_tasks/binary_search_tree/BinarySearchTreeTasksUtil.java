@@ -98,4 +98,24 @@ public class BinarySearchTreeTasksUtil {
 
         return root;
     }
+
+    public static String serialize(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        int largest = largestItem(root).val;
+        preorder(root, sb, largest);
+        return sb.toString();
+    }
+
+    private static void preorder(TreeNode node, StringBuilder sb, int largest) {
+        if (node == null) return;
+
+        sb.append(node.val);
+        sb.append(node.val != largest ? "," : "");
+        preorder(node.left, sb, largest);
+        preorder(node.right, sb, largest);
+    }
+
+    private static TreeNode largestItem(TreeNode node) {
+        return node.right == null ? node : largestItem(node.right);
+    }
 }

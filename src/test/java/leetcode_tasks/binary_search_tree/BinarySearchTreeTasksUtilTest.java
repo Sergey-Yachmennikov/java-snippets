@@ -37,9 +37,9 @@ class BinarySearchTreeTasksUtilTest {
     @Test
     void recoverTree() {
         TreeNode root = new TreeNode(3);
-
         root.left = new TreeNode(2);
         root.right = new TreeNode(1);
+
         BinarySearchTreeTasksUtil.recoverTree(root);
         BinarySearchTreeTasksUtil.showOrder(root);
     }
@@ -54,5 +54,15 @@ class BinarySearchTreeTasksUtilTest {
 
         TreeNode root = BinarySearchTreeTasksUtil.transformLinkedListToBST(head);
         BinarySearchTreeTasksUtil.showOrder(root);
+    }
+
+    @Test
+    void serialization() {
+        TreeNode root = new TreeNode(2);
+        root.left = new TreeNode(1);
+        root.right = new TreeNode(3);
+
+        String serialized = BinarySearchTreeTasksUtil.serialize(root);
+        assertEquals("2,1,3", serialized);
     }
 }
