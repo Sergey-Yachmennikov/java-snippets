@@ -118,4 +118,25 @@ public class BinarySearchTreeTasksUtil {
     private static TreeNode largestItem(TreeNode node) {
         return node.right == null ? node : largestItem(node.right);
     }
+
+    public static TreeNode bstFromPreorder(int[] values) {
+        TreeNode root = new TreeNode(values[0]);
+        for (int i = 1; i < values.length; i++) {
+            bstFromPreorder(root, values[i]);
+        }
+
+        return root;
+    }
+
+    private static TreeNode bstFromPreorder(TreeNode node, int value) {
+        if (node == null) return new TreeNode(value);
+
+        if (node.val > value) {
+            node.left = bstFromPreorder(node.left, value);
+        } else {
+            node.right = bstFromPreorder(node.right, value);
+        }
+
+        return node;
+    }
 }

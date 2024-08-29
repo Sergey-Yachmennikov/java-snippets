@@ -65,4 +65,15 @@ class BinarySearchTreeTasksUtilTest {
         String serialized = BinarySearchTreeTasksUtil.serialize(root);
         assertEquals("2,1,3", serialized);
     }
+
+    @Test
+    void bfsFromPreorderArray() {
+        TreeNode tree = BinarySearchTreeTasksUtil.bstFromPreorder(new int[]{8, 5, 1, 7, 10, 12});
+        assertEquals(8, tree.val);
+        assertEquals(5, tree.left.val);
+        assertEquals(1, tree.left.left.val);
+        assertEquals(7, tree.left.right.val);
+        assertEquals(10, tree.right.val);
+        assertEquals(12, tree.right.right.val);
+    }
 }
