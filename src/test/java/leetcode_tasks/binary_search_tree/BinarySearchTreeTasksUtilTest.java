@@ -32,4 +32,14 @@ class BinarySearchTreeTasksUtilTest {
         root.right = new TreeNode(3);
         assertTrue(BinarySearchTreeTasksUtil.isValidBST(root));
     }
+
+    @Test
+    void recoverTree() {
+        TreeNode root = new TreeNode(3);
+
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(1);
+        BinarySearchTreeTasksUtil.recoverTree(root);
+        BinarySearchTreeTasksUtil.showOrder(root);
+    }
 }
