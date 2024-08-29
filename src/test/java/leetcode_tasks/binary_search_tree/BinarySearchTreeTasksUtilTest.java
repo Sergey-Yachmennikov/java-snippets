@@ -1,5 +1,6 @@
 package leetcode_tasks.binary_search_tree;
 
+import data_structures.leetcode.ListNode;
 import data_structures.leetcode.TreeNode;
 import org.junit.jupiter.api.Test;
 
@@ -40,6 +41,18 @@ class BinarySearchTreeTasksUtilTest {
         root.left = new TreeNode(2);
         root.right = new TreeNode(1);
         BinarySearchTreeTasksUtil.recoverTree(root);
+        BinarySearchTreeTasksUtil.showOrder(root);
+    }
+
+    @Test
+    void transformLinkedListToBST() {
+        ListNode head = new ListNode(-10);
+        head.next = new ListNode(-3);
+        head.next.next = new ListNode(0);
+        head.next.next.next = new ListNode(5);
+        head.next.next.next.next = new ListNode(9);
+
+        TreeNode root = BinarySearchTreeTasksUtil.transformLinkedListToBST(head);
         BinarySearchTreeTasksUtil.showOrder(root);
     }
 }

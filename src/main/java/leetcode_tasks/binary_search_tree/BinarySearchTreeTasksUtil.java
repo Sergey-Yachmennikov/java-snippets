@@ -1,5 +1,6 @@
 package leetcode_tasks.binary_search_tree;
 
+import data_structures.leetcode.ListNode;
 import data_structures.leetcode.TreeNode;
 
 import java.util.*;
@@ -73,5 +74,28 @@ public class BinarySearchTreeTasksUtil {
         showOrder(node.left, list);
         list.add(node.val);
         showOrder(node.right, list);
+    }
+
+    public static TreeNode transformLinkedListToBST(ListNode head) {
+        if (head == null) return null;
+        if (head.next == null) return new TreeNode(head.val);
+
+        // two pointers
+        var slow = head;
+        var fast = head.next.next;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        TreeNode root = new TreeNode(slow.next.val);
+        ListNode rightPartStartNode = slow.next.next;
+        slow.next = null;
+
+        root.left = transformLinkedListToBST(head);
+        root.right = transformLinkedListToBST(rightPartStartNode);
+
+        return root;
     }
 }
