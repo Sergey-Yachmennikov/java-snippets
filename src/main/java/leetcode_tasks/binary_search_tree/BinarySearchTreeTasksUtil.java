@@ -171,4 +171,28 @@ public class BinarySearchTreeTasksUtil {
         list.add(root.val);
         inorderToList(root.right, list);
     }
+
+    public static List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) return result;
+        Queue<TreeNode> queue = new LinkedList<>();
+        List<Integer> rootValue = new ArrayList<>();
+        rootValue.add(root.val);
+        result.add(rootValue);
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+
+            ArrayList<Integer> levelValues = new ArrayList<>();
+            if (node.left != null) levelValues.add(node.left.val);
+            if (node.right != null) levelValues.add(node.right.val);
+            if (node.left != null || node.right != null) result.add(levelValues);
+
+            if (node.left != null) queue.add(node.left);
+            if (node.right != null) queue.add(node.right);
+        }
+
+        return result;
+    }
 }

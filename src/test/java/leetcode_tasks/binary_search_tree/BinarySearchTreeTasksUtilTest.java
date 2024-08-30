@@ -4,6 +4,8 @@ import data_structures.leetcode.ListNode;
 import data_structures.leetcode.TreeNode;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BinarySearchTreeTasksUtilTest {
@@ -75,5 +77,31 @@ class BinarySearchTreeTasksUtilTest {
         assertEquals(7, tree.left.right.val);
         assertEquals(10, tree.right.val);
         assertEquals(12, tree.right.right.val);
+    }
+
+    @Test
+    void levelOrder() {
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
+        System.out.println(root.right);
+        List<List<Integer>> resultList = BinarySearchTreeTasksUtil.levelOrder(root);
+        System.out.println(resultList);
+        assertEquals(3, resultList.size());
+
+        TreeNode root2 = null;
+        List<List<Integer>> emptyList = BinarySearchTreeTasksUtil.levelOrder(root2);
+        assertEquals(0, emptyList.size());
+
+        TreeNode root3 = new TreeNode(3);
+        root3.left = new TreeNode(9);
+        root3.right = new TreeNode(20);
+        root3.right.left = new TreeNode(15);
+
+        List<List<Integer>> resultListNoBalanced = BinarySearchTreeTasksUtil.levelOrder(root3);
+        System.out.println(resultListNoBalanced);
+        assertEquals(3, resultListNoBalanced.size());
     }
 }
