@@ -139,4 +139,36 @@ public class BinarySearchTreeTasksUtil {
 
         return node;
     }
+
+    // merge 2 trees to 1 list
+    public static List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
+        List<Integer> l1 = new ArrayList<>();
+        List<Integer> l2 = new ArrayList<>();
+
+        inorderToList(root1, l1);
+        inorderToList(root2, l2);
+
+        List<Integer> result = new ArrayList<>();
+        int i = 0, j = 0;
+
+        while(i < l1.size() && j < l2.size()) {
+            if (l1.get(i) > l2.get(j)) {
+                result.add(l2.get(j++));
+            } else {
+                result.add(l1.get(i++));
+            }
+        }
+
+        while(i < l1.size()) result.add(l1.get(i++));
+        while(j < l2.size()) result.add(l2.get(j++));
+
+        return result;
+    }
+
+    private static void inorderToList(TreeNode root, List<Integer> list){
+        if(root == null) return;
+        inorderToList(root.left, list);
+        list.add(root.val);
+        inorderToList(root.right, list);
+    }
 }
