@@ -195,4 +195,20 @@ public class BinarySearchTreeTasksUtil {
 
         return result;
     }
+
+    public static List<Integer> bfsIterative(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            list.add(node.val);
+
+            if (node.right != null) stack.push(node.right);
+            if (node.left != null) stack.push(node.left);
+        }
+
+        return list;
+    }
 }
