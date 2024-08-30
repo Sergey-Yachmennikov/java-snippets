@@ -196,7 +196,7 @@ public class BinarySearchTreeTasksUtil {
         return result;
     }
 
-    public static List<Integer> bfsIterative(TreeNode root) {
+    public static List<Integer> dfsIterative(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
         stack.push(root);
@@ -210,5 +210,22 @@ public class BinarySearchTreeTasksUtil {
         }
 
         return list;
+    }
+
+    public static List<Integer> bfsRecursive(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        bfsRecursive(queue, list);
+        return list;
+    }
+
+    private static void bfsRecursive(Queue<TreeNode> queue, List<Integer> list) {
+        if (queue.isEmpty()) return;
+        TreeNode node = queue.poll();
+        list.add(node.val);
+        if (node.left != null) queue.add(node.left);
+        if (node.right != null) queue.add(node.right);
+        bfsRecursive(queue, list);
     }
 }
