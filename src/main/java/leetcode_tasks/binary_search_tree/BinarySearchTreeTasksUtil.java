@@ -2,6 +2,7 @@ package leetcode_tasks.binary_search_tree;
 
 import data_structures.leetcode.ListNode;
 import data_structures.leetcode.TreeNode;
+import sorting.SortingUtil;
 
 import java.util.*;
 
@@ -207,6 +208,7 @@ public class BinarySearchTreeTasksUtil {
 
             if (node.right != null) stack.push(node.right);
             if (node.left != null) stack.push(node.left);
+            System.out.println(stack);
         }
 
         return list;
@@ -227,5 +229,30 @@ public class BinarySearchTreeTasksUtil {
         if (node.left != null) queue.add(node.left);
         if (node.right != null) queue.add(node.right);
         bfsRecursive(queue, list);
+    }
+
+    public static int maxDepth(TreeNode root) {
+        if (root == null) return 0;
+        int leftDepth = 1;
+        int rightDepth = 1;
+        TreeNode currentLeft = root;
+        TreeNode currentRight = root;
+
+        while(currentLeft.left != null) {
+            currentLeft = currentLeft.left;
+            leftDepth++;
+        }
+
+        while(currentRight.right != null) {
+            currentRight = currentRight.right;
+            rightDepth++;
+        }
+
+        return Math.max(leftDepth, rightDepth);
+    }
+
+    public static int maxDepthRecursive(TreeNode root) {
+        if(root == null) return 0;
+        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
     }
 }
