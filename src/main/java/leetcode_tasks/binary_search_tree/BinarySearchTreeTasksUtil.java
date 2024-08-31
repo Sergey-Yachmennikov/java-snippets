@@ -255,4 +255,12 @@ public class BinarySearchTreeTasksUtil {
         if(root == null) return 0;
         return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
     }
+
+    // check path sum of both subtrees
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if (root == null) return false;
+        targetSum -= root.val;
+        if (root.left == null && root.right == null && targetSum == 0) return true;
+        return hasPathSum(root.left, targetSum) || hasPathSum(root.right, targetSum);
+    }
 }
