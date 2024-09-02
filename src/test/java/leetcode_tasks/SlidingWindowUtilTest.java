@@ -25,4 +25,9 @@ class SlidingWindowUtilTest {
         int[] nums = new int[]{1,3,2,2,5,2,3,7};
         assertEquals(5, SlidingWindowUtil.findLongestHarmoniousSubsequence(nums));
     }
+
+    @Test
+    void lengthOfTheLongestSubstringTwoDistinct() {
+        assertEquals(5, SlidingWindowUtil.lengthOfTheLongestSubstringTwoDistinct("ccaabbb"));
+    }
 }
