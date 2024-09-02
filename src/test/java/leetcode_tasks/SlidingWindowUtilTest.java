@@ -19,4 +19,10 @@ class SlidingWindowUtilTest {
         int target = 7;
         assertEquals(2, SlidingWindowUtil.minSubArrayLength(target, nums));
     }
+
+    @Test
+    void findLHS() {
+        int[] nums = new int[]{1,3,2,2,5,2,3,7};
+        assertEquals(5, SlidingWindowUtil.findLongestHarmoniousSubsequence(nums));
+    }
 }

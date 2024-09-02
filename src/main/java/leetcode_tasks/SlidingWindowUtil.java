@@ -1,5 +1,8 @@
 package leetcode_tasks;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 public class SlidingWindowUtil {
 
     private SlidingWindowUtil() {}
@@ -32,5 +35,27 @@ public class SlidingWindowUtil {
         }
 
         return result == Integer.MAX_VALUE ? 0 : result;
+    }
+
+    public static int findLongestHarmoniousSubsequence(int[] nums) {
+        int count = 0;
+        HashMap<Integer,Integer> map = new HashMap<>();
+
+        for(int val: nums) {
+            if(map.containsKey(val)){
+                map.put(val, map.get(val)+1);
+            } else {
+                map.put(val,1);
+            }
+        }
+
+        for(int val: nums) {
+            if(map.containsKey(val + 1)){
+                int freq = map.get(val) + map.get(val + 1);
+                count = Math.max(count, freq);
+            }
+        }
+
+        return count;
     }
 }
