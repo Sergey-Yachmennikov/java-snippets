@@ -30,4 +30,11 @@ class SlidingWindowUtilTest {
     void lengthOfTheLongestSubstringTwoDistinct() {
         assertEquals(5, SlidingWindowUtil.lengthOfTheLongestSubstringTwoDistinct("ccaabbb"));
     }
+
+    @Test
+    void lengthOfTheLongestSubstringWithoutRepeatingCharacters() {
+        assertEquals(3, SlidingWindowUtil.lengthOfTheLongestSubstringWithoutRepeatingCharacters("abcabcbb"));
+        assertEquals(1, SlidingWindowUtil.lengthOfTheLongestSubstringWithoutRepeatingCharacters("bbbbb"));
+        assertEquals(3, SlidingWindowUtil.lengthOfTheLongestSubstringWithoutRepeatingCharacters("pwwkew"));
+    }
 }

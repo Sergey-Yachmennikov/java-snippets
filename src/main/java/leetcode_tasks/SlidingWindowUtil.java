@@ -1,7 +1,6 @@
 package leetcode_tasks;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 public class SlidingWindowUtil {
@@ -73,6 +72,33 @@ public class SlidingWindowUtil {
             map.put(arr[R], map.getOrDefault(arr[R], 0) + 1); // increment count of repetition of each value
 
             while (map.size() > 2) { // if map contains more than 2 keys, decrement the very first char repetition count
+                map.put(arr[L], map.get(arr[L]) - 1);
+                if (map.get(arr[L]) == 0) {
+                    map.remove(arr[L]);
+                }
+                L++;
+            }
+
+            maxLength = Math.max(maxLength, R - L + 1);
+            R++;
+        }
+
+        return maxLength;
+    }
+
+    public static int lengthOfTheLongestSubstringWithoutRepeatingCharacters(String s) {
+        char[] arr = s.toCharArray();
+        int n = arr.length;
+        if (n < 2) return n;
+        int L = 0;
+        int R = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        int maxLength = 0;
+
+        while (R < n) {
+            map.put(arr[R], map.getOrDefault(arr[R], 0) + 1);
+
+            while (map.size() != R - L + 1) {
                 map.put(arr[L], map.get(arr[L]) - 1);
                 if (map.get(arr[L]) == 0) {
                     map.remove(arr[L]);
