@@ -112,4 +112,48 @@ public class SlidingWindowUtil {
 
         return maxLength;
     }
+
+    public static int findMaxConsecutiveOnes1(int[] nums) {
+        int n = nums.length;
+        if (n < 2) return n;
+        int counter = 0;
+        int max = 0;
+
+        for (int num : nums) {
+            if (num == 1) {
+                counter++;
+                max = Math.max(max, counter);
+            }
+            else counter = 0;
+        }
+
+        return max;
+    }
+
+    public static int findMaxConsecutiveOnes2(int[] nums) {
+        int n = nums.length;
+        if (n < 2) return n;
+        int L = 0;
+        int R = 0;
+        int counter = 0;
+        int maxLength = 0;
+
+        while (R < n) {
+            if (nums[R] == 0) {
+                counter++;
+            }
+
+            while (counter > 1) {
+                if (nums[L] == 0) {
+                    counter--;
+                }
+                L++;
+            }
+
+            maxLength = Math.max(maxLength, R - L + 1);
+            R++;
+        }
+
+        return maxLength;
+    }
 }

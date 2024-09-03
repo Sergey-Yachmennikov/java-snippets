@@ -37,4 +37,15 @@ class SlidingWindowUtilTest {
         assertEquals(1, SlidingWindowUtil.lengthOfTheLongestSubstringWithoutRepeatingCharacters("bbbbb"));
         assertEquals(3, SlidingWindowUtil.lengthOfTheLongestSubstringWithoutRepeatingCharacters("pwwkew"));
     }
+
+    @Test
+    void findMaxConsecutiveOnes1() {
+        assertEquals(3, SlidingWindowUtil.findMaxConsecutiveOnes1(new int[]{1,1,0,1,1,1}));
+        assertEquals(3, SlidingWindowUtil.findMaxConsecutiveOnes1(new int[]{1,1,1,0,1,1}));
+    }
+
+    @Test
+    void findMaxConsecutiveOnes2() {
+        assertEquals(4, SlidingWindowUtil.findMaxConsecutiveOnes2(new int[]{1,0,1,1,0,1}));
+    }
 }
