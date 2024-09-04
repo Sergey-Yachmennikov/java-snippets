@@ -48,4 +48,9 @@ class SlidingWindowUtilTest {
     void findMaxConsecutiveOnes2() {
         assertEquals(4, SlidingWindowUtil.findMaxConsecutiveOnes2(new int[]{1,0,1,1,0,1}));
     }
+
+    @Test
+    void checkPermutationInclusion() {
+        assertTrue(SlidingWindowUtil.checkPermutationInclusion("ab", "eidbaooo"));
+    }
 }

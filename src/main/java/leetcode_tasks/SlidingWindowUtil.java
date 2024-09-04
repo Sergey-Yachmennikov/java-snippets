@@ -156,4 +156,39 @@ public class SlidingWindowUtil {
 
         return maxLength;
     }
+
+    public static boolean checkPermutationInclusion(String s1, String s2) {
+        int[] arr = new int[128];
+        int L = 0;
+        int R = 0;
+        char[] s1_arr = s1.toCharArray();
+        char[] s2_arr = s2.toCharArray();
+        int minLength = Integer.MAX_VALUE;
+        int counter = 0;
+
+        for (char cur : s1_arr) {
+            arr[cur]++;
+        }
+
+        while (R < s2_arr.length) {
+            char cur = s2_arr[R];
+            if (--arr[cur] >= 0) {
+                counter++;
+            }
+
+            while (counter == s1_arr.length) {
+                int curLen = R - L + 1;
+                minLength = Math.min(minLength, curLen);
+                char leftChar = s2_arr[L];
+                if (++arr[leftChar] > 0) {
+                    counter--;
+                }
+                L++;
+            }
+
+            R++;
+        }
+
+        return minLength == s1.length();
+    }
 }
