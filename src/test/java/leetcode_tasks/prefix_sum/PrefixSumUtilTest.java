@@ -12,4 +12,10 @@ class PrefixSumUtilTest {
         assertEquals(20, prefSummer.sumRange(1, 5));
     }
 
+    @Test
+    void findMaxLength() {
+        assertEquals(2, PrefixSumUtil.findMaxLength(new int[]{0,1}));
+        assertEquals(2, PrefixSumUtil.findMaxLength(new int[]{0,1,0}));
+    }
+
 }
