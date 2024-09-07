@@ -14,7 +14,7 @@ class PrefixSumUtilTest {
 
     @Test
     void findMaxLength() {
-        assertEquals(2, PrefixSumUtil.findMaxLength(new int[]{0,1}));
+        assertEquals(6, PrefixSumUtil.findMaxLength(new int[]{0,1,0,1,0,1}));
         assertEquals(2, PrefixSumUtil.findMaxLength(new int[]{0,1,0}));
     }
 

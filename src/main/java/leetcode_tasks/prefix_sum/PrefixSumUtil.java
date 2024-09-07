@@ -1,6 +1,7 @@
 package leetcode_tasks.prefix_sum;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class PrefixSumUtil {
 
@@ -24,19 +25,17 @@ public class PrefixSumUtil {
     }
 
     public static int findMaxLength(int[] nums) {
-        int[] indices = new int[nums.length * 2 + 1];
-        Arrays.fill(indices, -2);
-        indices[nums.length] = -1;
-        int count = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int sum = 0;
+        map.put(0, -1);
         int max = 0;
-        for (int i = 0; i < nums.length; i++) {
-            count += nums[i] == 0 ? -1 : 1;
-            int last = indices[nums.length - count];
-            if (last >= -1) {
-                max = Math.max(max, i - last);
-            } else {
-                indices[nums.length - count] = i;
-            }
+
+        for(int i = 0; i < nums.length; i++){
+            sum += (nums[i] == 0 ? -1 : 1);
+            if(map.containsKey(sum)) {
+                max = Math.max(max, i - map.get(sum));
+            } else
+                map.put(sum, i);
         }
 
         return max;

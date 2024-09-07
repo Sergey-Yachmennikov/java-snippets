@@ -23,10 +23,9 @@ public class SearchBasicAlgorithms {
     public static int binarySearch(int[] array, int elementToFind) {
         int startIndex = 0;
         int endIndex = array.length - 1;
-        int middleIndex;
 
         while (startIndex <= endIndex) {
-            middleIndex = startIndex + (endIndex - startIndex) / 2;
+            int middleIndex = startIndex + (endIndex - startIndex) / 2;
 
             if (array[middleIndex] == elementToFind) {
                 return middleIndex;
