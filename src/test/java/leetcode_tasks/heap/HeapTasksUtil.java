@@ -40,4 +40,49 @@ public class HeapTasksUtil {
 
         return result;
     }
+
+    private static class Triple {
+        int value;
+        int i;
+        int index;
+
+        public Triple(int value,int i,int index){
+            this.value = value;
+            this.i = i;
+            this.index = index;
+        }
+
+        @Override
+        public String toString() {
+            return "Triple{" +
+                    "value=" + value +
+                    ", i=" + i +
+                    ", index=" + index +
+                    '}';
+        }
+    }
+
+    public static List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        PriorityQueue<Triple> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.value));
+
+        for(int i = 0; i < Math.min(k, nums1.length); i++) {
+            pq.add(new Triple(nums1[i] + nums2[0], i,0));
+        }
+
+        List<List<Integer>> list = new ArrayList<>();
+        while(k != list.size()) {
+            List<Integer> list1 = new ArrayList<>();
+            Triple triple = pq.remove();
+
+            list1.add(nums1[triple.i]);
+            list1.add(nums2[triple.index]);
+            list.add(list1);
+            if(triple.index != nums2.length - 1){
+                triple.index ++;
+                pq.add(new Triple(nums1[triple.i] + nums2[triple.index ], triple.i, triple.index ));
+            }
+        }
+
+        return list;
+    }
 }
