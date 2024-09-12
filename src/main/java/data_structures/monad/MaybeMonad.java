@@ -16,7 +16,7 @@ public class MaybeMonad <T> {
     }
 
     public <U> MaybeMonad<U> map(Function<T, U> mapFunc) {
-        return value != null ? new MaybeMonad<U>(mapFunc.apply(value)) : (MaybeMonad<U>) empty;
+        return value != null ? new MaybeMonad<>(mapFunc.apply(value)) : (MaybeMonad<U>) empty;
     }
 
     public T unwrapValue() {
