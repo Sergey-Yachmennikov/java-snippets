@@ -56,4 +56,57 @@ public class ArrayTasksUtil {
 
         return outcome.toArray(new int[outcome.size()][]);
     }
+
+    public static int[][] insertInterval(int[][] intervals, int[] newInterval) {
+        int till = -1, from = -1;
+        int n = intervals.length;
+        int[][] result;
+
+        // case if length == 0
+        if (n == 0) {
+            result = new int[1][2];
+            result[0] = newInterval;
+            return result;
+        }
+
+        // case if new interval less than first element of intervals arr
+        if (newInterval[1] < intervals[0][0]) {
+            result = new int[n + 1][2];
+            result[0] = newInterval;
+            System.arraycopy(intervals, 0, result, 1, n);
+            return result;
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (till == -1 && intervals[i][1] >= newInterval[0]) till = i;
+
+            if (newInterval[1] < intervals[i][0]) {
+                from = i - 1;
+                break;
+            }
+
+            if (newInterval[1] == intervals[i][0]) {
+                from = i;
+                break;
+            }
+        }
+
+        if (till == -1) {
+            result = new int[n + 1][2];
+            System.arraycopy(intervals, 0, result, 0, n);
+            result[n] = newInterval;
+            return result;
+        }
+
+        from = from == -1 ? n - 1 : from;
+        newInterval[0] = Math.min(newInterval[0], intervals[till][0]);
+        newInterval[1] = Math.max(newInterval[1], intervals[from][1]);
+
+        result = new int[till + n - from][2];
+        result[till] = newInterval;
+        System.arraycopy(intervals, 0, result, 0, till);
+        System.arraycopy(intervals, from + 1, result, till + 1, n - from - 1);
+
+        return result;
+    }
 }

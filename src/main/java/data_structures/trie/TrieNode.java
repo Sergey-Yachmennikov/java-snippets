@@ -94,7 +94,7 @@ public class TrieNode {
     public static TrieNode readFromFile(String path) {
         TrieNode root = new TrieNode();
         try (FileReader reader = new FileReader(path)) {
-            reader.read();
+            reader.read(); // skip root node value
             root.readFromFile(reader);
         } catch (IOException e) {
             throw new RuntimeException(e);
