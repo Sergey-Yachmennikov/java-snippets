@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DynamicProgrammingUtilTest {
 
@@ -23,5 +24,17 @@ class DynamicProgrammingUtilTest {
         assertTrue(DynamicProgrammingUtil.wordBreak("leetcode", List.of("leet","code")));
         assertTrue(DynamicProgrammingUtil.wordBreak("applepenapple", List.of("apple","pen")));
         assertFalse(DynamicProgrammingUtil.wordBreak("catsandog", List.of("cats","dog","sand","and","cat")));
+    }
+
+    @Test
+    void minCostClimbingStairs() {
+        assertEquals(15, DynamicProgrammingUtil.minCostClimbingStairs(new int[] {10,15,20}));
+        assertEquals(6, DynamicProgrammingUtil.minCostClimbingStairs(new int[] {1,100,1,1,1,100,1,1,100,1}));
+
+        assertEquals(15, DynamicProgrammingUtil.minCostClimbingStairsIterative(new int[] {10,15,20}));
+        assertEquals(6, DynamicProgrammingUtil.minCostClimbingStairsIterative(new int[] {1,100,1,1,1,100,1,1,100,1}));
+
+        assertEquals(15, DynamicProgrammingUtil.minCostClimbingStairsIterativeOptimized(new int[] {10,15,20}));
+        assertEquals(6, DynamicProgrammingUtil.minCostClimbingStairsIterativeOptimized(new int[] {1,100,1,1,1,100,1,1,100,1}));
     }
 }
