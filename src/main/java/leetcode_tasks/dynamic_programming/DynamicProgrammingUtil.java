@@ -1,5 +1,6 @@
 package leetcode_tasks.dynamic_programming;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class DynamicProgrammingUtil {
@@ -100,5 +101,42 @@ public class DynamicProgrammingUtil {
         }
 
         return maxSum;
+    }
+
+    public static int maxProduct(int[] nums) {
+        int n = nums.length;
+        int l = 1;
+        int r = 1;
+        int outcome = nums[0];
+
+        for (int i = 0; i < n; i++) {
+            l = l == 0 ? 1 : l;
+            r = r == 0 ? 1 : r;
+
+            l *= nums[i];
+            r *= nums[n - 1 - i];
+
+            outcome = Math.max(outcome, Math.max(l, r));
+        }
+
+        return outcome;
+    }
+
+    public static boolean canPartition(int[] nums) {
+        int sum = Arrays.stream(nums)
+                .reduce(0, Integer::sum);
+
+        if (sum % 2 != 0) return false;
+        boolean[][] dp = new boolean[nums.length + 1][(sum / 2) + 1];
+        for (int i = 0; i < nums.length; i++) dp[i][0] = true;
+
+        for (int i = nums.length - 1; i >= 0; i--) {
+            for (int j = 1; j <= sum / 2; j++) {
+                if (j - nums[i] >= 0) dp[i][j] = dp[i + 1][j - nums[i]];
+                dp[i][j] = dp[i][j] || dp[i + 1][j];
+            }
+        }
+
+        return dp[0][sum / 2];
     }
 }

@@ -44,4 +44,16 @@ class DynamicProgrammingUtilTest {
         assertEquals(7, DynamicProgrammingUtil.findMaxSubarraySum(array));
         assertEquals(7, DynamicProgrammingUtil.findMaxSubarraySumBruteForce(array));
     }
+
+    @Test
+    void maxProduct() {
+        assertEquals(6, DynamicProgrammingUtil.maxProduct(new int[] {2,3,-1,4}));
+        assertEquals(0, DynamicProgrammingUtil.maxProduct(new int[] {-2,0,-1}));
+    }
+
+    @Test
+    void canPartition() {
+        assertTrue(DynamicProgrammingUtil.canPartition(new int[] {1,5,11,5}));
+        assertFalse(DynamicProgrammingUtil.canPartition(new int[] {1,2,3,5}));
+    }
 }
