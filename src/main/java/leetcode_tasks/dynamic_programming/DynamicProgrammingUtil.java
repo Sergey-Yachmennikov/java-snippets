@@ -63,15 +63,42 @@ public class DynamicProgrammingUtil {
     }
 
     public static int minCostClimbingStairsIterativeOptimized(int[] cost) {
-        int n = cost.length;
         int first = cost[0];
         int second = cost[1];
-        for (int i = 2; i < n; i++) {
+        for (int i = 2; i < cost.length; i++) {
             int current = cost[i] + Math.min(first, second);
             first = second;
             second = current;
         }
 
         return Math.min(first, second);
+    }
+
+    // Kadane’s Algorithm
+    public static int findMaxSubarraySum(int[] numbers) {
+        int currentSum = 0;
+        int maxSum = numbers[0];
+
+        for (int num : numbers) {
+            currentSum = Math.max(currentSum + num, num);
+            maxSum = Math.max(maxSum, currentSum);
+        }
+
+        return maxSum;
+    }
+
+    // brute force solution for previous one
+    public static int findMaxSubarraySumBruteForce(int[] numbers) {
+        int maxSum = numbers[0];
+        for (int i = 0; i < numbers.length; i++) {
+
+            int subarraySum = 0;
+            for (int j = i; j < numbers.length; j++) {
+                subarraySum = subarraySum + numbers[j];
+                maxSum = Math.max(maxSum, subarraySum);
+            }
+        }
+
+        return maxSum;
     }
 }

@@ -37,4 +37,11 @@ class DynamicProgrammingUtilTest {
         assertEquals(15, DynamicProgrammingUtil.minCostClimbingStairsIterativeOptimized(new int[] {10,15,20}));
         assertEquals(6, DynamicProgrammingUtil.minCostClimbingStairsIterativeOptimized(new int[] {1,100,1,1,1,100,1,1,100,1}));
     }
+
+    @Test
+    void findMaxSubarraySum() {
+        int[] array = {-2, -3, 4, -1, -2, 1, 5, -3};
+        assertEquals(7, DynamicProgrammingUtil.findMaxSubarraySum(array));
+        assertEquals(7, DynamicProgrammingUtil.findMaxSubarraySumBruteForce(array));
+    }
 }
