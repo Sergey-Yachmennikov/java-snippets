@@ -139,4 +139,22 @@ public class DynamicProgrammingUtil {
 
         return dp[0][sum / 2];
     }
+
+    public static boolean canPartitionOneDimension(int[] nums) {
+        int sum = Arrays.stream(nums)
+                .reduce(0, Integer::sum);
+
+        if (sum % 2 != 0) return false;
+        int halfOfSum = sum / 2;
+        boolean[] subsetSums = new boolean[halfOfSum + 1];
+
+        subsetSums[0] = true;
+        for (int num : nums) {
+            for (int j = halfOfSum; j >= num; j--) {
+                subsetSums[j] = subsetSums[j] || subsetSums[j - num];
+            }
+        }
+
+        return subsetSums[halfOfSum];
+    }
 }

@@ -56,4 +56,10 @@ class DynamicProgrammingUtilTest {
         assertTrue(DynamicProgrammingUtil.canPartition(new int[] {1,5,11,5}));
         assertFalse(DynamicProgrammingUtil.canPartition(new int[] {1,2,3,5}));
     }
+
+    @Test
+    void canPartitionOneDimension() {
+        assertTrue(DynamicProgrammingUtil.canPartitionOneDimension(new int[] {1,5,11,5}));
+        assertFalse(DynamicProgrammingUtil.canPartitionOneDimension(new int[] {1,2,3,5}));
+    }
 }
