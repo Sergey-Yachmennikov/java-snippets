@@ -62,4 +62,9 @@ class DynamicProgrammingUtilTest {
         assertTrue(DynamicProgrammingUtil.canPartitionOneDimension(new int[] {1,5,11,5}));
         assertFalse(DynamicProgrammingUtil.canPartitionOneDimension(new int[] {1,2,3,5}));
     }
+
+    @Test
+    void calculator() {
+        assertEquals(17, DynamicProgrammingUtil.calculator(32718));
+    }
 }

@@ -157,4 +157,25 @@ public class DynamicProgrammingUtil {
 
         return subsetSums[halfOfSum];
     }
+
+    public static int calculator(int n) {
+        if (n == 1) return 0;
+        if (n == 2 || n == 3) return 1;
+        int[] m = new int[n + 1];
+        m[2] = m[3] = 1;
+
+        for (int i = 4; i < n + 1; i++) {
+            if (i % 2 == 0 && i % 3 == 0) {
+                m[i] = Math.min(Math.min(m[i - 1], m[i / 2]), m[i / 3]) + 1;
+            } else if (i % 2 == 0 && i % 3 != 0) {
+                m[i] = Math.min(m[i - 1], m[i / 2]) + 1;
+            } else if (i % 2 != 0 && i % 3 == 0) {
+                m[i] = Math.min(m[i - 1], m[i / 3]) + 1;
+            } else {
+                m[i] = m[i - 1] + 1;
+            }
+        }
+
+        return m[n];
+    }
 }
