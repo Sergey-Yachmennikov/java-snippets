@@ -32,11 +32,8 @@ public class ArraysTasks {
             int area = width * height;
             result = Math.max(result, area);
 
-            if (lines[leftLine] > lines[rightLine]){
-                rightLine--;
-            } else {
-                leftLine++;
-            }
+            if (lines[leftLine] > lines[rightLine]) rightLine--;
+            else leftLine++;
         }
 
         return result;
