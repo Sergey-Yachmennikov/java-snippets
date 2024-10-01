@@ -1,5 +1,8 @@
 package leetcode_tasks.graphs;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class GraphsTaskUtil {
 
     private GraphsTaskUtil() {}
@@ -19,5 +22,29 @@ public class GraphsTaskUtil {
         }
 
         return -1;
+    }
+
+    public static int findCenter(int[][] edges) {
+        Map<Integer, Integer> degree = new HashMap<>();
+
+        for (int[] edge : edges) {
+            degree.put(edge[0], degree.getOrDefault(edge[0], 0) + 1);
+            degree.put(edge[1], degree.getOrDefault(edge[1], 0) + 1);
+        }
+
+        for (int node : degree.keySet()) {
+            if (degree.get(node) == edges.length) return node;
+        }
+
+        return -1;
+    }
+
+    public static int findCenterConstant(int[][] edges) {
+        int[] firstEdge = edges[0];
+        int[] secondEdge = edges[1];
+
+        return (firstEdge[0] == secondEdge[0] || firstEdge[0] == secondEdge[1])
+                ? firstEdge[0]
+                : firstEdge[1];
     }
 }
