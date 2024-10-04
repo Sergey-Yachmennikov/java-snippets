@@ -1,7 +1,6 @@
 package leetcode_tasks.graphs;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class GraphsTaskUtil {
 
@@ -46,5 +45,37 @@ public class GraphsTaskUtil {
         return (firstEdge[0] == secondEdge[0] || firstEdge[0] == secondEdge[1])
                 ? firstEdge[0]
                 : firstEdge[1];
+    }
+
+    public static boolean validPath(int n, int[][] edges, int source, int destination) {
+        // Create adjacency list representation of the graph
+        List<List<Integer>> adjacencyList = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) adjacencyList.add(new ArrayList<>());
+
+        for (int[] edge : edges) {
+            adjacencyList.get(edge[0]).add(edge[1]);
+            adjacencyList.get(edge[1]).add(edge[0]);
+        }
+
+        // Perform BFS traversal to find if there's a valid path from source to destination
+        Queue<Integer> queue = new LinkedList<>();
+        boolean[] visited = new boolean[n]; // n represents count of vertices
+        queue.offer(source);
+        visited[source] = true;
+
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
+            if (current == destination) return true; // Found a path
+
+            for (int neighbor : adjacencyList.get(current)) {
+                if (!visited[neighbor]) {
+                    queue.offer(neighbor);
+                    visited[neighbor] = true;
+                }
+            }
+        }
+
+        return false;
     }
 }

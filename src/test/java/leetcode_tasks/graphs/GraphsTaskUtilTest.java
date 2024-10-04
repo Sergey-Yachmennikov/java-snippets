@@ -21,4 +21,10 @@ class GraphsTaskUtilTest {
         assertEquals(2, GraphsTaskUtil.findCenterConstant(new int[][] { {1,2}, {2, 3}, {4, 2} }));
         assertEquals(1, GraphsTaskUtil.findCenterConstant(new int[][] { {1, 2}, {5, 1}, {1, 3}, {1, 4} }));
     }
+
+    @Test
+    void validPath() {
+        assertTrue(GraphsTaskUtil.validPath(3, new int[][] { {0, 1}, {1, 2}, {2, 0} }, 0 , 2));
+        assertFalse(GraphsTaskUtil.validPath(6, new int[][] { {0, 1}, {0, 2}, {3, 5}, {5, 4}, {4, 3} }, 0 , 5));
+    }
 }
