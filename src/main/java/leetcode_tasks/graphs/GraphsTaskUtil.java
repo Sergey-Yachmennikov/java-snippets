@@ -78,4 +78,25 @@ public class GraphsTaskUtil {
 
         return false;
     }
+
+    public static GraphNode cloneGraph(GraphNode node) {
+        if(node == null) return null;
+        HashMap<GraphNode, GraphNode> map = new HashMap<>();
+        return cloneGraphNode(node, map);
+    }
+
+    private static GraphNode cloneGraphNode(GraphNode node, HashMap<GraphNode, GraphNode> map) {
+        GraphNode newNode = new GraphNode(node.val);
+        map.put(node, newNode);
+
+        for(GraphNode n : node.neighbors) {
+            if(!map.containsKey(n)) {
+                newNode.neighbors.add(cloneGraphNode(n, map));
+            } else {
+                newNode.neighbors.add(map.get(n));
+            }
+        }
+
+        return newNode;
+    }
 }
