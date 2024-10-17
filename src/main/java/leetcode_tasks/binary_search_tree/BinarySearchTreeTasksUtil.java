@@ -28,8 +28,7 @@ public class BinarySearchTreeTasksUtil {
     // check valid order of element in tree
     public static boolean isValidBST(TreeNode root) {
         boolean[] is = {true};
-        int[] prev = {Integer.MIN_VALUE};
-        validateInorder(root, is, prev);
+        validateInorder(root, is, new int[]{Integer.MIN_VALUE});
         return is[0];
     }
 

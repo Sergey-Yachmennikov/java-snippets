@@ -42,10 +42,10 @@ public class SlidingWindowUtil {
         HashMap<Integer,Integer> map = new HashMap<>();
 
         for(int val: nums) {
-            if(map.containsKey(val)){
-                map.put(val, map.get(val)+1);
+            if(map.containsKey(val)) {
+                map.put(val, map.get(val) + 1);
             } else {
-                map.put(val,1);
+                map.put(val, 1);
             }
         }
 
