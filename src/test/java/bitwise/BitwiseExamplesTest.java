@@ -57,4 +57,18 @@ class BitwiseExamplesTest {
         a >>= 1;
         assertEquals(4, a);
     }
+
+    @Test
+    void bitCount() {
+        int a = 100;
+        assertEquals("1100100", Integer.toBinaryString(a));
+        assertEquals(3, Integer.bitCount(a));
+    }
+
+    @Test
+    void calculateOneBits() {
+        int a = 8;
+        assertEquals(1, BitwiseExamples.calculateOneBits(a));
+        assertEquals(1, Integer.bitCount(a));
+    }
 }

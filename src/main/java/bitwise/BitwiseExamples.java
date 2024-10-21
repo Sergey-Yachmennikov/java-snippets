@@ -21,4 +21,14 @@ public class BitwiseExamples {
         System.out.println(Integer.toBinaryString(p4));
         System.out.println(p6);
     }
+
+    // calculate bits count (symbol 1) in integer
+    public static int calculateOneBits(int n) {
+        int result = 0;
+        while (n > 0) {
+            if (n % 2 == 1) result++;
+            n /= 2;
+        }
+        return result;
+    }
 }
