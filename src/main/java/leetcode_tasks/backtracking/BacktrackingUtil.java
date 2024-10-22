@@ -42,4 +42,40 @@ public class BacktrackingUtil {
 
         return result;
     }
+
+
+    public static int subsetXORSum(int[] nums) {
+        int[] ans = new int[]{0};
+        List<Integer> all = new ArrayList<>();
+        findAns(0, nums, all, ans);
+        return ans[0];
+    }
+
+    private static void findAns(int index, int[] nums, List<Integer> all, int[] ans) {
+        if (index == nums.length) { // iterated all nums
+            int result = 0;
+            for (int num : all) result ^= num;
+            ans[0] += result;
+        } else {
+            all.add(nums[index]);
+            findAns(index + 1, nums, all, ans);
+            all.removeLast();
+            findAns(index + 1, nums, all, ans);
+        }
+    }
+
+    public static int subsetXORSum2(int[] nums) {
+        int[] totalXorSum = new int[]{0};
+        dfsXor(nums, 0, 0, totalXorSum);
+        return totalXorSum[0];
+    }
+
+    private static void dfsXor(int[] nums, int index, int currentXor, int[] totalXorSum) {
+        totalXorSum[0] += currentXor;
+        for (int i = index; i < nums.length; i++) {
+            currentXor ^= nums[i];
+            dfsXor(nums, i + 1, currentXor, totalXorSum);
+            currentXor ^= nums[i];
+        }
+    }
 }

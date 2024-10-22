@@ -33,4 +33,17 @@ class BacktrackingUtilTest {
         for (int i = 0; i < result1.size(); i++) assertEquals(expected.get(i), result1.get(i));
         assertEquals(0, result2.size());
     }
+
+    @Test
+    void subsetXORSum() {
+        assertEquals(6, BacktrackingUtil.subsetXORSum(new int[] {1,3}));
+        assertEquals(28, BacktrackingUtil.subsetXORSum(new int[] {5,1,6}));
+        assertEquals(480, BacktrackingUtil.subsetXORSum(new int[] {3,4,5,6,7,8}));
+
+    }
+
+    @Test
+    void subsetXORSum2() {
+        assertEquals(28, BacktrackingUtil.subsetXORSum2(new int[] {2,5,6}));
+    }
 }
