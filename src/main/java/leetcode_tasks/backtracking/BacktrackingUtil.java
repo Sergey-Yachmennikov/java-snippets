@@ -43,7 +43,6 @@ public class BacktrackingUtil {
         return result;
     }
 
-
     public static int subsetXORSum(int[] nums) {
         int[] ans = new int[]{0};
         List<Integer> all = new ArrayList<>();
@@ -93,5 +92,23 @@ public class BacktrackingUtil {
         }
 
         return n;
+    }
+
+    public static List<String> letterCombinations(String digits) {
+        List<String> ans = new ArrayList<>();
+        if (digits == null || digits.isEmpty()) return ans;
+        String[] mapping = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        backtraceLetters(digits, "", ans, mapping, 0);
+        return ans;
+    }
+
+    private static void backtraceLetters(String digits, String current, List<String> ans, String[] mapping, int index) {
+        if (index == digits.length()) {
+            ans.add(current);
+            return;
+        }
+
+        String letters = mapping[digits.charAt(index) - '0'];
+        for (int i = 0; i < letters.length(); i++) backtraceLetters(digits, current + letters.charAt(i), ans, mapping, index + 1);
     }
 }

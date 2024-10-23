@@ -50,5 +50,17 @@ class BacktrackingUtilTest {
     @Test
     void printSubsets() {
         assertEquals(16, BacktrackingUtil.printSubsets(new char[] {'a', 'b', 'c', 'd'}));
+        assertEquals(32, BacktrackingUtil.printSubsets(new char[] {'a', 'b', 'c', 'd', 'e'}));
+    }
+
+    @Test
+    void letterCombinations() {
+        List<String> expected1 = new ArrayList<>(List.of("ad","ae","af","bd","be","bf","cd","ce","cf"));
+        List<String> result1 = BacktrackingUtil.letterCombinations("23");
+        for (int i = 0; i < expected1.size(); i++) assertEquals(expected1.get(i), result1.get(i));
+        assertEquals(0, BacktrackingUtil.letterCombinations("").size());
+        List<String> expected3 = new ArrayList<>(List.of("a","b","c"));
+        List<String> result3 = BacktrackingUtil.letterCombinations("2");
+        for (int i = 0; i < expected3.size(); i++) assertEquals(expected3.get(i), result3.get(i));
     }
 }
