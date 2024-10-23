@@ -78,4 +78,20 @@ public class BacktrackingUtil {
             currentXor ^= nums[i];
         }
     }
+
+    public static int printSubsets(char[] set) {
+        int n = 1 << set.length;
+        for (int i = 0; i < n; i++) {
+            System.out.print("{ ");
+
+            // Print current subset
+            for (int j = 0; j < n; j++) {
+                if ((i & (1 << j)) > 0) System.out.print(set[j] + " ");
+            }
+
+            System.out.println("}");
+        }
+
+        return n;
+    }
 }

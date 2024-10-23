@@ -46,4 +46,9 @@ class BacktrackingUtilTest {
     void subsetXORSum2() {
         assertEquals(28, BacktrackingUtil.subsetXORSum2(new int[] {2,5,6}));
     }
+
+    @Test
+    void printSubsets() {
+        assertEquals(16, BacktrackingUtil.printSubsets(new char[] {'a', 'b', 'c', 'd'}));
+    }
 }
