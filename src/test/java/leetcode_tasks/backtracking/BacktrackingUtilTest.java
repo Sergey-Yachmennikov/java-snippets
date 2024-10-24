@@ -63,4 +63,13 @@ class BacktrackingUtilTest {
         List<String> result3 = BacktrackingUtil.letterCombinations("2");
         for (int i = 0; i < expected3.size(); i++) assertEquals(expected3.get(i), result3.get(i));
     }
+
+    @Test
+    void calculateSubsets() {
+        List<List<Integer>> result = BacktrackingUtil.calculateSubsets(new int[]{1,2,3});
+        System.out.println(result);
+
+        List<List<Integer>> result2 = BacktrackingUtil.calculateSubsetsIterative(new int[]{1,2,3});
+        System.out.println(result2);
+    }
 }

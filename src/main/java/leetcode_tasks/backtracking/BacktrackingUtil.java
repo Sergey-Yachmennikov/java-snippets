@@ -111,4 +111,38 @@ public class BacktrackingUtil {
         String letters = mapping[digits.charAt(index) - '0'];
         for (int i = 0; i < letters.length(); i++) backtraceLetters(digits, current + letters.charAt(i), ans, mapping, index + 1);
     }
+
+    public static List<List<Integer>> calculateSubsets(int[] arr) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> backtrackSet = new ArrayList<>();
+        dfsSubset(arr, 0, backtrackSet, result);
+        return result;
+    }
+
+    private static void dfsSubset(int[] nums, int index, List<Integer> backtrackSet, List<List<Integer>> subsets) {
+        if (index == nums.length) {
+            subsets.add(new ArrayList<>(backtrackSet));
+        } else {
+            backtrackSet.add(nums[index]);
+            dfsSubset(nums, index + 1, backtrackSet, subsets);
+            backtrackSet.removeLast();
+            dfsSubset(nums, index + 1, backtrackSet, subsets);
+        }
+    }
+
+    public static List<List<Integer>> calculateSubsetsIterative(int[] arr) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> backtrackSet = new ArrayList<>();
+        dfsSubsetIterative(arr, 0, backtrackSet, result);
+        return result;
+    }
+
+    private static void dfsSubsetIterative(int[] nums, int index, List<Integer> backtrackSet, List<List<Integer>> subsets) {
+        subsets.add(new ArrayList<>(backtrackSet));
+        for (int i = index; i < nums.length; i++) {
+            backtrackSet.add(nums[i]);
+            dfsSubsetIterative(nums, i + 1, backtrackSet, subsets);
+            backtrackSet.removeLast();
+        }
+    }
 }
