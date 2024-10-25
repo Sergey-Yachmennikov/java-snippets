@@ -3,6 +3,7 @@ package leetcode_tasks.backtracking;
 import data_structures.leetcode.TreeNode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BacktrackingUtil {
@@ -166,6 +167,47 @@ public class BacktrackingUtil {
             output.add(")");
             backtrackParenthesis(n, leftCount, rightCount + 1, output, result);
             output.removeLast();
+        }
+    }
+
+    public static List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> resultList = new ArrayList<>();
+        backtrackPermute(resultList, new ArrayList<>(), nums);
+        return resultList;
+    }
+
+    private static void backtrackPermute(List<List<Integer>> list, List<Integer> tempList, int [] nums) {
+        if (tempList.size() == nums.length) {
+            list.add(new ArrayList<>(tempList));
+        } else {
+            for (int num : nums) {
+                if (tempList.contains(num)) continue; // element already exists, skip
+                tempList.add(num);
+                backtrackPermute(list, tempList, nums);
+                tempList.removeLast();
+            }
+        }
+    }
+
+    public static List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(nums);
+        backtrackPermuteUnique(list, new ArrayList<>(), nums, new boolean[nums.length]);
+        return list;
+    }
+
+    private static void backtrackPermuteUnique(List<List<Integer>> list, List<Integer> tempList, int [] nums, boolean [] used) {
+        if (tempList.size() == nums.length) {
+            list.add(new ArrayList<>(tempList));
+        } else {
+            for (int i = 0; i < nums.length; i++) {
+                if(used[i] || i > 0 && nums[i] == nums[i-1] && !used[i - 1]) continue;
+                used[i] = true;
+                tempList.add(nums[i]);
+                backtrackPermuteUnique(list, tempList, nums, used);
+                used[i] = false;
+                tempList.removeLast();
+            }
         }
     }
 }

@@ -82,4 +82,12 @@ class BacktrackingUtilTest {
         assertEquals(1, result2.size());
         assertEquals("()", result2.getFirst());
     }
+
+    @Test
+    void permute() {
+        List<List<Integer>> permuted = BacktrackingUtil.permute(new int[]{1, 2, 3});
+        System.out.println(permuted);
+        List<List<Integer>> permuteUnique = BacktrackingUtil.permuteUnique(new int[]{1, 2, 3});
+        System.out.println(permuteUnique);
+    }
 }
