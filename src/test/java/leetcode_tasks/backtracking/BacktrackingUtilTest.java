@@ -72,4 +72,14 @@ class BacktrackingUtilTest {
         List<List<Integer>> result2 = BacktrackingUtil.calculateSubsetsIterative(new int[]{1,2,3});
         System.out.println(result2);
     }
+
+    @Test
+    void generateParenthesis() {
+        List<String> result1 = BacktrackingUtil.generateParenthesis(3);
+        List<String> expected1 = List.of("((()))","(()())","(())()","()(())","()()()");
+        for (int i = 0; i < result1.size(); i++) assertEquals(result1.get(i), expected1.get(i));
+        List<String> result2 = BacktrackingUtil.generateParenthesis(1);
+        assertEquals(1, result2.size());
+        assertEquals("()", result2.getFirst());
+    }
 }

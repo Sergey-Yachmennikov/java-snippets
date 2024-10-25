@@ -145,4 +145,27 @@ public class BacktrackingUtil {
             backtrackSet.removeLast();
         }
     }
+
+    public static List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        List<String> output = new ArrayList<>();
+        backtrackParenthesis(n, 0, 0, output, result);
+        return result;
+    }
+
+    public static void backtrackParenthesis(int n, int leftCount, int rightCount, List<String> output, List<String> result) {
+        if (leftCount >= n && rightCount >= n) result.add(String.join("", output));
+
+        if (leftCount < n) {
+            output.add("(");
+            backtrackParenthesis(n, leftCount + 1, rightCount, output, result);
+            output.removeLast();
+        }
+
+        if (rightCount < leftCount) {
+            output.add(")");
+            backtrackParenthesis(n, leftCount, rightCount + 1, output, result);
+            output.removeLast();
+        }
+    }
 }
