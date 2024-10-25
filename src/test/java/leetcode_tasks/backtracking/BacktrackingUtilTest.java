@@ -39,7 +39,6 @@ class BacktrackingUtilTest {
         assertEquals(6, BacktrackingUtil.subsetXORSum(new int[] {1,3}));
         assertEquals(28, BacktrackingUtil.subsetXORSum(new int[] {5,1,6}));
         assertEquals(480, BacktrackingUtil.subsetXORSum(new int[] {3,4,5,6,7,8}));
-
     }
 
     @Test
@@ -85,9 +84,11 @@ class BacktrackingUtilTest {
 
     @Test
     void permute() {
+        String expectedStr = "[[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]";
         List<List<Integer>> permuted = BacktrackingUtil.permute(new int[]{1, 2, 3});
-        System.out.println(permuted);
+        assertEquals(expectedStr, permuted.toString());
         List<List<Integer>> permuteUnique = BacktrackingUtil.permuteUnique(new int[]{1, 2, 3});
-        System.out.println(permuteUnique);
+        assertEquals(expectedStr, permuteUnique.toString());
+        System.out.println("Permutation result: " + permuted);
     }
 }
