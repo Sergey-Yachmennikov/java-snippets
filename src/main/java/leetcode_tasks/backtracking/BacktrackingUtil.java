@@ -234,9 +234,9 @@ public class BacktrackingUtil {
     }
 
     public static List<List<Integer>> combinationSumUnique(int[] candidates, int target) {
-        List < List < Integer >> result = new ArrayList < > ();
+        List<List<Integer>> result = new ArrayList<>();
         Arrays.sort(candidates);
-        findCombinations(0, candidates, target, result, new ArrayList < > ());
+        findCombinations(0, candidates, target, result, new ArrayList<>());
         return result;
     }
 
@@ -254,5 +254,61 @@ public class BacktrackingUtil {
             findCombinations(i + 1, arr, target - arr[i], ans, ds);
             ds.removeLast();
         }
+    }
+
+    public static List<List<Integer>> getNCombination(int n, int k) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> currentCombination = new ArrayList<>();
+        combinationNBacktrack(n, k, 1, currentCombination, result);
+        return result;
+    }
+
+    private static void combinationNBacktrack(int n, int k, int start, List<Integer> currentCombination, List<List<Integer>> result) {
+        if (currentCombination.size() == k) {
+            result.add(new ArrayList<>(currentCombination));
+            return;
+        }
+
+        for (int i = start; i <= n; i++) {
+            currentCombination.add(i);
+            combinationNBacktrack(n, k, i + 1, currentCombination, result);
+            currentCombination.removeLast();
+        }
+    }
+
+    public static boolean wordSearchIn2DMatrix(char[][] board, String word) {
+        int x = board.length;
+        int y = board[0].length;
+        boolean[][] visited = new boolean[x][y];
+
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
+                if (board[i][j] == word.charAt(0)) {
+                    boolean result =  wordSearchBacktrack(board, word, visited, i, j, 0);
+                    if (result) return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private static boolean wordSearchBacktrack(char[][] board, String word, boolean[][] visited, int i, int j, int index) {
+        if (index == word.length()) return true;
+        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || visited[i][j] || board[i][j] != word.charAt(index)) {
+            return false;
+        }
+
+        visited[i][j] = true;
+
+        if (wordSearchBacktrack(board, word, visited, i + 1, j, index + 1) ||
+            wordSearchBacktrack(board, word, visited, i - 1, j, index + 1) ||
+            wordSearchBacktrack(board, word, visited, i, j + 1, index + 1) ||
+            wordSearchBacktrack(board, word, visited, i, j - 1, index + 1)) {
+            return true;
+        }
+
+        visited[i][j] = false;
+        return false;
     }
 }

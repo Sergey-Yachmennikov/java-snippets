@@ -109,4 +109,23 @@ class BacktrackingUtilTest {
         String resultStr = "[[1, 1, 6], [1, 2, 5], [1, 7], [2, 6]]";
         assertEquals(resultStr, BacktrackingUtil.combinationSumUnique(new int[]{10,1,2,7,6,1,5}, 8).toString());
     }
+
+    @Test
+    void getNCombination() {
+        String resultStr = "[[1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4]]";
+        assertEquals(resultStr, BacktrackingUtil.getNCombination(4, 2).toString());
+    }
+
+    @Test
+    void wordSearchIn2DMatrix() {
+        char[][] chars = {
+                {'A', 'B', 'C', 'E'},
+                {'S', 'F', 'C', 'S'},
+                {'A', 'D', 'E', 'E'}
+        };
+
+        assertTrue(BacktrackingUtil.wordSearchIn2DMatrix(chars, "ABCCED"));
+        assertTrue(BacktrackingUtil.wordSearchIn2DMatrix(chars, "SEE"));
+        assertFalse(BacktrackingUtil.wordSearchIn2DMatrix(chars, "ABCB"));
+    }
 }
