@@ -91,4 +91,22 @@ class BacktrackingUtilTest {
         assertEquals(expectedStr, permuteUnique.toString());
         System.out.println("Permutation result: " + permuted);
     }
+
+    @Test
+    void combinationSum() {
+        String outputString1 = "[[2, 2, 3], [7]]";
+        assertEquals(outputString1, BacktrackingUtil.combinationSum(new int[]{2,3,6,7}, 7).toString());
+
+        String outputString2 = "[[2, 2, 2, 2], [2, 3, 3], [3, 5]]";
+        assertEquals(outputString2, BacktrackingUtil.combinationSum(new int[]{2,3,5}, 8).toString());
+
+        List<List<Integer>> lists = BacktrackingUtil.combinationSum(new int[]{10, 1, 2, 7, 6, 1, 5}, 8);
+        System.out.println(lists);
+    }
+
+    @Test
+    void combinationSumUnique() {
+        String resultStr = "[[1, 1, 6], [1, 2, 5], [1, 7], [2, 6]]";
+        assertEquals(resultStr, BacktrackingUtil.combinationSumUnique(new int[]{10,1,2,7,6,1,5}, 8).toString());
+    }
 }

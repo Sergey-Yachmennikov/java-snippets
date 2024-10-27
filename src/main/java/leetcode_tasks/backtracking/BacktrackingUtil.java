@@ -1,5 +1,6 @@
 package leetcode_tasks.backtracking;
 
+import ch.qos.logback.core.encoder.JsonEscapeUtil;
 import data_structures.leetcode.TreeNode;
 
 import java.util.ArrayList;
@@ -208,6 +209,50 @@ public class BacktrackingUtil {
                 used[i] = false;
                 tempList.removeLast();
             }
+        }
+    }
+
+    public static List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        find(result, new ArrayList<>(), candidates, target, 0);
+        return result;
+    }
+
+    private static void find(List<List<Integer>> res, List<Integer> temp, int[] nums, int target, int index) {
+        if (target < 0) return;
+
+        if (target == 0) {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+
+        for (int i = index; i < nums.length; i++) {
+            temp.add(nums[i]);
+            find(res, temp, nums, target - nums[i], i);
+            temp.removeLast();
+        }
+    }
+
+    public static List<List<Integer>> combinationSumUnique(int[] candidates, int target) {
+        List < List < Integer >> result = new ArrayList < > ();
+        Arrays.sort(candidates);
+        findCombinations(0, candidates, target, result, new ArrayList < > ());
+        return result;
+    }
+
+    private static void findCombinations(int index, int[] arr, int target, List<List<Integer>> ans, List <Integer> ds) {
+        if (target == 0) {
+            ans.add(new ArrayList<>(ds));
+            return;
+        }
+
+        for (int i = index; i < arr.length; i++) {
+            if (i > index && arr[i] == arr[i - 1]) continue;
+            if (arr[i] > target) break;
+
+            ds.add(arr[i]);
+            findCombinations(i + 1, arr, target - arr[i], ans, ds);
+            ds.removeLast();
         }
     }
 }
