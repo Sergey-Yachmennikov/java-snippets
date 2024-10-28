@@ -135,4 +135,10 @@ class BacktrackingUtilTest {
         assertEquals("255.255.11.135", ipAddresses.getFirst());
         assertEquals("255.255.111.35", ipAddresses.getLast());
     }
+
+    @Test
+    void generateTrees() {
+        List<TreeNode> treeNodes = BacktrackingUtil.generateTrees(3);
+        System.out.println(treeNodes);
+    }
 }

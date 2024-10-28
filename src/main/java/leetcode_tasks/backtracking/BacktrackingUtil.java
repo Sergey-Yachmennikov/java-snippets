@@ -346,4 +346,26 @@ public class BacktrackingUtil {
 
         address.setLength(beginning);
     }
+
+    public static List<TreeNode> generateTrees(int n) {
+        return generateTreesInRange(1, n);
+    }
+
+    private static List<TreeNode> generateTreesInRange(int start, int end) {
+        List<TreeNode> trees = new ArrayList<>();
+        if (start > end) {
+            trees.add(null);
+        } else {
+            for (int rootValue = start; rootValue <= end; ++rootValue) {
+                List<TreeNode> leftSubtrees = generateTreesInRange(start, rootValue - 1);
+                List<TreeNode> rightSubtrees = generateTreesInRange(rootValue + 1, end);
+
+                for (TreeNode leftSubtree : leftSubtrees) {
+                    for (TreeNode rightSubtree : rightSubtrees) trees.add(new TreeNode(rootValue, leftSubtree, rightSubtree));
+                }
+            }
+        }
+
+        return trees;
+    }
 }

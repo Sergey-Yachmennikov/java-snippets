@@ -9,6 +9,9 @@ public class BinarySearchTreeTasksWithDPUtil {
 
     private BinarySearchTreeTasksWithDPUtil() {}
 
+    /**
+     * @topic Dynamic Programming, Backtracking, Binary Tree, Binary Search Tree
+     */
     @SuppressWarnings("unchecked")
     public static List<TreeNode> generateTrees(int n) {
         List<TreeNode>[][] dp = new List[n + 1][n + 1];
