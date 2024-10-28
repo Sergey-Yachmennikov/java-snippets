@@ -128,4 +128,11 @@ class BacktrackingUtilTest {
         assertTrue(BacktrackingUtil.wordSearchIn2DMatrix(chars, "SEE"));
         assertFalse(BacktrackingUtil.wordSearchIn2DMatrix(chars, "ABCB"));
     }
+
+    @Test
+    void restoreIpAddresses() {
+        List<String> ipAddresses = BacktrackingUtil.restoreIpAddresses("25525511135");
+        assertEquals("255.255.11.135", ipAddresses.getFirst());
+        assertEquals("255.255.111.35", ipAddresses.getLast());
+    }
 }

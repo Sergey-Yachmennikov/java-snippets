@@ -284,7 +284,8 @@ public class BacktrackingUtil {
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 if (board[i][j] == word.charAt(0)) {
-                    boolean result =  wordSearchBacktrack(board, word, visited, i, j, 0);
+                    // need a local variable cuz can be several the same letters
+                    boolean result = wordSearchBacktrack(board, word, visited, i, j, 0);
                     if (result) return true;
                 }
             }
@@ -310,5 +311,39 @@ public class BacktrackingUtil {
 
         visited[i][j] = false;
         return false;
+    }
+
+    public static List<String> restoreIpAddresses(String s) {
+        if(s.length() < 4 || s.length() > 12) return List.of();
+        final List<String> result = new ArrayList<>();
+        backTrackIpAddresses(result, new StringBuilder(), s, 0, 0);
+        return result;
+    }
+
+    private static void backTrackIpAddresses(List<String> result, StringBuilder address, String s, int start, int count) {
+        if(start >= s.length() && count == 4) {
+            result.add(address.substring(0, address.length() - 1));
+            return;
+        }
+
+        if(s.length() - start > 3 * (4 - count)) return;
+
+        final int beginning = address.length();
+
+        for(int i = start; i < Math.min(start + 3, s.length()); i++) {
+            address.append(s.charAt(i));
+
+            final String number = address.substring(beginning, address.length());
+
+            if(Integer.parseInt(number) <= 255) {
+                address.append('.');
+                backTrackIpAddresses(result, address, s, i + 1, count + 1);
+                address.setLength(address.length() - 1);
+            }
+
+            if(number.equals("0")) break;
+        }
+
+        address.setLength(beginning);
     }
 }
