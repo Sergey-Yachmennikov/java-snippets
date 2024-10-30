@@ -169,4 +169,11 @@ class BacktrackingUtilTest {
         List<List<Integer>> lists2 = BacktrackingUtil.pathSum(root2, 5);
         assertEquals("[1,2,3]", lists2.getFirst().toString());
     }
+
+    @Test
+    void partition() {
+        List<List<String>> palindromeCombinations = BacktrackingUtil.partition("aab");
+        assertEquals("[a, a, b]", palindromeCombinations.getFirst().toString());
+        assertEquals("[aa, b]", palindromeCombinations.getLast().toString());
+    }
 }
