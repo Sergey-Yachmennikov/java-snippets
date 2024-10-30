@@ -141,4 +141,32 @@ class BacktrackingUtilTest {
         List<TreeNode> treeNodes = BacktrackingUtil.generateTrees(3);
         System.out.println(treeNodes);
     }
+
+    @Test
+    void pathSum() {
+        TreeNode root = new TreeNode(5);
+
+        root.left = new TreeNode(4);
+        root.left.left = new TreeNode(11);
+        root.left.left.left = new TreeNode(7);
+        root.left.left.right = new TreeNode(2);
+
+        root.right = new TreeNode(8);
+        root.right.left = new TreeNode(13);
+        root.right.right = new TreeNode(4);
+        root.right.right.left = new TreeNode(5);
+        root.right.right.right = new TreeNode(1);
+
+        List<List<Integer>> lists = BacktrackingUtil.pathSum(root, 22);
+
+        assertEquals("[5, 4, 11, 2]", lists.getFirst().toString());
+        assertEquals("[5, 8, 4, 5]", lists.getLast().toString());
+
+        TreeNode root2 = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+
+        List<List<Integer>> lists2 = BacktrackingUtil.pathSum(root2, 5);
+        assertEquals("[1,2,3]", lists2.getFirst().toString());
+    }
 }
