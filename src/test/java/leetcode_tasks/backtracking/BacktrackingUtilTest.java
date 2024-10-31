@@ -176,4 +176,16 @@ class BacktrackingUtilTest {
         assertEquals("[a, a, b]", palindromeCombinations.getFirst().toString());
         assertEquals("[aa, b]", palindromeCombinations.getLast().toString());
     }
+
+    @Test
+    void combinationSum3() {
+        assertEquals("[[1, 2, 4]]", BacktrackingUtil.combinationSum3(3, 7).toString());
+        assertEquals("[[1, 2, 6], [1, 3, 5], [2, 3, 4]]", BacktrackingUtil.combinationSum3(3, 9).toString());
+    }
+
+    @Test
+    void makeSquare() {
+        assertTrue(BacktrackingUtil.makeSquare(new int[] {1,1,2,2,2}));
+        assertFalse(BacktrackingUtil.makeSquare(new int[] {3,3,3,3,4}));
+    }
 }

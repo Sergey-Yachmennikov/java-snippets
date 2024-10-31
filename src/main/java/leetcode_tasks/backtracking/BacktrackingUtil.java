@@ -1,6 +1,5 @@
 package leetcode_tasks.backtracking;
 
-import ch.qos.logback.core.encoder.JsonEscapeUtil;
 import data_structures.leetcode.TreeNode;
 
 import java.util.ArrayList;
@@ -422,5 +421,57 @@ public class BacktrackingUtil {
         }
 
         return true;
+    }
+
+    public static List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> combinations = new ArrayList<>();
+        // 45 is sum of elements from 1 to 9
+        if (n <= 45) combinationSum3R (k, n, 1, combinations, new ArrayList<>());
+        return combinations;
+    }
+
+    private static void combinationSum3R(int k, int n, int value, List<List<Integer>> combinations, List<Integer> combination) {
+        if (combination.size() == k && n == 0) {
+            combinations.add(new ArrayList<>(combination));
+            return;
+        }
+
+        for (int i = value; i < 10; i++) {
+            if (combination.size() > k || n < 0) break;
+            combination.add(i);
+            combinationSum3R(k, n - i, i + 1, combinations, combination);
+            combination.removeLast();
+        }
+    }
+
+    public static boolean makeSquare(int[] matchsticks) {
+        int perimeter = 0;
+        for (int val : matchsticks) perimeter += val;
+        if (perimeter % 4 != 0) return false; // perimeter of a square should be dividable by 4
+        int[] sides = new int[4];
+        int sideLength = perimeter / 4;
+        Arrays.sort(matchsticks); //sorting in ascending order
+
+        for (int i = 0; i < matchsticks.length / 2; i++) {
+            int temp = matchsticks[i];
+            matchsticks[i] = matchsticks[matchsticks.length - i - 1];
+            matchsticks[matchsticks.length - i - 1] = temp;
+        }
+
+        return makeSquareBacktrack(sides, matchsticks, 0, sideLength);
+    }
+
+    private static boolean makeSquareBacktrack(int[] sides, int[] matchsticks, int index, int sideLength) {
+        if (index == matchsticks.length) return true;
+
+        for (int i = 0; i < 4; i++) {
+            if (sides[i] + matchsticks[index] <= sideLength) {
+                sides[i] += matchsticks[index];
+                if (makeSquareBacktrack(sides, matchsticks, index + 1, sideLength)) return true;
+                sides[i] -= matchsticks[index];
+            }
+        }
+
+        return false;
     }
 }
