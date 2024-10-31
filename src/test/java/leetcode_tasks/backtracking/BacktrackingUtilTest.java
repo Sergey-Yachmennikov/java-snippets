@@ -188,4 +188,10 @@ class BacktrackingUtilTest {
         assertTrue(BacktrackingUtil.makeSquare(new int[] {1,1,2,2,2}));
         assertFalse(BacktrackingUtil.makeSquare(new int[] {3,3,3,3,4}));
     }
+
+    @Test
+    void makeSquare2() {
+        assertTrue(BacktrackingUtil.makeSquare2(new int[] {1,1,2,2,2}));
+        assertFalse(BacktrackingUtil.makeSquare2(new int[] {3,3,3,3,4}));
+    }
 }

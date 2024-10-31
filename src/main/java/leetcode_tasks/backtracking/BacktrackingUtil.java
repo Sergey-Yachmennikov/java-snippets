@@ -452,6 +452,7 @@ public class BacktrackingUtil {
         int sideLength = perimeter / 4;
         Arrays.sort(matchsticks); //sorting in ascending order
 
+        // set reverse order
         for (int i = 0; i < matchsticks.length / 2; i++) {
             int temp = matchsticks[i];
             matchsticks[i] = matchsticks[matchsticks.length - i - 1];
@@ -469,6 +470,35 @@ public class BacktrackingUtil {
                 sides[i] += matchsticks[index];
                 if (makeSquareBacktrack(sides, matchsticks, index + 1, sideLength)) return true;
                 sides[i] -= matchsticks[index];
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean makeSquare2(int[] matchsticks) {
+        if (matchsticks == null || matchsticks.length < 4) return false;
+        int n = matchsticks.length;
+        int sum = 0;
+        for (int num : matchsticks) sum += num;
+        if (sum % 4 != 0) return false;
+        sum /= 4;
+        Arrays.sort(matchsticks);
+        if (matchsticks[n - 1] > sum) return false;
+        int[] buckets = new int[4];
+        Arrays.fill(buckets, sum);
+        return makeSquareBacktrack2(matchsticks,n - 1, buckets);
+    }
+
+    private static boolean makeSquareBacktrack2(int[] nums, int index, int[] buckets) {
+        if (index == -1) return true;
+
+        for (int i = 0; i < 4; i++) {
+            if (i > 0 && buckets[i] == buckets[i - 1]) continue;
+            if (buckets[i] == nums[index] || buckets[i] - nums[index] >= nums[0]) {
+                buckets[i] -= nums[index];
+                if (makeSquareBacktrack2(nums,index - 1, buckets)) return true;
+                buckets[i] += nums[index];
             }
         }
 
