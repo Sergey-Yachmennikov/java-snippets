@@ -4,6 +4,7 @@ import data_structures.leetcode.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class BacktrackingUtil {
@@ -503,5 +504,84 @@ public class BacktrackingUtil {
         }
 
         return false;
+    }
+
+    public static List<List<Integer>> findSubsequences(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> currentList = new ArrayList<>();
+        allNonDecreasingSub(result, currentList, nums, 0);
+        return result;
+    }
+
+    private static void allNonDecreasingSub(List<List<Integer>> ans, List <Integer> currentList, int[] nums, int index) {
+        if(index == nums.length) return;
+        HashSet<Integer> set = new HashSet<>();
+
+        for (int i = index; i < nums.length; i++) {
+            if (set.contains(nums[i])) continue;
+            set.add(nums[i]);
+
+            if (currentList.isEmpty()) {
+                currentList.add(nums[i]);
+                allNonDecreasingSub(ans, currentList, nums, i + 1);
+                currentList.removeLast();
+            } else {
+                if (nums[i] >= currentList.getLast()) {
+                    currentList.add(nums[i]);
+                    ans.add(new ArrayList<>(currentList));
+                    allNonDecreasingSub(ans, currentList, nums, i + 1);
+                    currentList.removeLast();
+                }
+            }
+        }
+    }
+
+    public static List<List<String>> solveNQueens(int n) {
+        List<List<String>> result=new ArrayList<>();
+        char[][] matrix = new char[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = '.';
+            }
+        }
+        solveNQueensBacktrack(0, matrix, n, result);
+        return result;
+    }
+
+    private static void solveNQueensBacktrack(int row, char[][] matrix, int n, List<List<String>> result) {
+        if (row >= n) {
+            List<String> temp = new ArrayList<>();
+            for(int i = 0; i < n; i++) {
+                StringBuilder str = new StringBuilder();
+                for (int j = 0; j < n; j++) str.append(matrix[i][j]);
+                temp.add(str.toString());
+            }
+            result.add(temp);
+            return;
+        }
+
+        for (int col = 0; col < n; col++) {
+            if(isValid(matrix, row, col, n)) {
+                matrix[row][col] = 'Q';
+                solveNQueensBacktrack(row + 1, matrix, n, result);
+                matrix[row][col] = '.';
+            }
+        }
+    }
+
+    private static boolean isValid(char[][] matrix, int row, int col, int n) {
+        for (int i = 0; i < row; i++) {
+            if (matrix[i][col] == 'Q') return false;
+        }
+
+        for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+            if (matrix[i][j] == 'Q') return false;
+        }
+
+        for (int i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++) {
+            if (matrix[i][j] == 'Q') return false;
+        }
+
+        return true;
     }
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BacktrackingUtilTest {
 
@@ -193,5 +194,21 @@ class BacktrackingUtilTest {
     void makeSquare2() {
         assertTrue(BacktrackingUtil.makeSquare2(new int[] {1,1,2,2,2}));
         assertFalse(BacktrackingUtil.makeSquare2(new int[] {3,3,3,3,4}));
+    }
+
+    @Test
+    void findSubsequences() {
+        assertEquals(
+                "[[4, 6], [4, 6, 7], [4, 6, 7, 7], [4, 7], [4, 7, 7], [6, 7], [6, 7, 7], [7, 7]]",
+                BacktrackingUtil.findSubsequences(new int[] {4,6,7,7}).toString()
+        );
+    }
+
+    @Test
+    void solveNQueens() {
+        assertEquals(
+                "[[.Q.., ...Q, Q..., ..Q.], [..Q., Q..., ...Q, .Q..]]",
+                BacktrackingUtil.solveNQueens(4).toString()
+        );
     }
 }
