@@ -537,7 +537,7 @@ public class BacktrackingUtil {
     }
 
     public static List<List<String>> solveNQueens(int n) {
-        List<List<String>> result=new ArrayList<>();
+        List<List<String>> result = new ArrayList<>();
         char[][] matrix = new char[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -549,7 +549,15 @@ public class BacktrackingUtil {
     }
 
     private static void solveNQueensBacktrack(int row, char[][] matrix, int n, List<List<String>> result) {
-        if (row >= n) {
+        if (row < n) {
+            for (int col = 0; col < n; col++) {
+                if(isValid(matrix, row, col, n)) {
+                    matrix[row][col] = 'Q';
+                    solveNQueensBacktrack(row + 1, matrix, n, result);
+                    matrix[row][col] = '.';
+                }
+            }
+        } else {
             List<String> temp = new ArrayList<>();
             for(int i = 0; i < n; i++) {
                 StringBuilder str = new StringBuilder();
@@ -557,27 +565,21 @@ public class BacktrackingUtil {
                 temp.add(str.toString());
             }
             result.add(temp);
-            return;
-        }
-
-        for (int col = 0; col < n; col++) {
-            if(isValid(matrix, row, col, n)) {
-                matrix[row][col] = 'Q';
-                solveNQueensBacktrack(row + 1, matrix, n, result);
-                matrix[row][col] = '.';
-            }
         }
     }
 
     private static boolean isValid(char[][] matrix, int row, int col, int n) {
+        // check by column vertical `top -> bottom`
         for (int i = 0; i < row; i++) {
             if (matrix[i][col] == 'Q') return false;
         }
 
+        // check by left diagonal `bottom -> top`
         for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
             if (matrix[i][j] == 'Q') return false;
         }
 
+        // check by right diagonal `bottom -> top`
         for (int i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++) {
             if (matrix[i][j] == 'Q') return false;
         }
