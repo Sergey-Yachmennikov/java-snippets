@@ -1,5 +1,9 @@
 package sorting;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 public class SortingUtil {
 
     private SortingUtil() {}
@@ -174,5 +178,44 @@ public class SortingUtil {
         array[i] = array[i] ^ array[j];
         array[j] = array[i] ^ array[j];
         array[i] = array[i] ^ array[j];
+    }
+
+    // Kahn's Algorithm or Topological Sort
+    public static int[] topologicalSort(List<List<Integer>> adj, int V) {
+        // Array to store inDegree of each vertex
+        int[] inDegree = new int[V];
+        for (int i = 0; i < V; i++) {
+            for (int it : adj.get(i)) inDegree[it]++;
+        }
+
+        // Queue to store vertices with inDegree 0
+        Queue<Integer> q = new LinkedList<>();
+        for (int i = 0; i < V; i++) {
+            if (inDegree[i] == 0) q.offer(i);
+        }
+
+        int[] result = new int[V];
+        int index = 0;
+
+        while (!q.isEmpty()) {
+            int node = q.poll();
+            result[index++] = node;
+
+            // Decrease inDegree of adjacent vertices as the current node is in topological order
+            for (int it : adj.get(node)) {
+                inDegree[it]--;
+
+                // If inDegree becomes 0, push it to the queue
+                if (inDegree[it] == 0) q.offer(it);
+            }
+        }
+
+        // Check for cycle
+        if (index != V) {
+            System.out.println("Graph contains cycle!");
+            return new int[0];
+        }
+
+        return result;
     }
 }

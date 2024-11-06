@@ -27,4 +27,9 @@ class GraphsTaskUtilTest {
         assertTrue(GraphsTaskUtil.validPath(3, new int[][] { {0, 1}, {1, 2}, {2, 0} }, 0 , 2));
         assertFalse(GraphsTaskUtil.validPath(6, new int[][] { {0, 1}, {0, 2}, {3, 5}, {5, 4}, {4, 3} }, 0 , 5));
     }
+
+    @Test
+    void findMinHeightTrees() {
+        assertEquals(1, GraphsTaskUtil.findMinHeightTrees(4, new int[][]{ {1, 0}, {1, 2}, {1, 3} }).getFirst());
+    }
 }
