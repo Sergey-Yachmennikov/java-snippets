@@ -16,8 +16,7 @@ public class GraphsTaskUtil {
         }
 
         for (int i = 1; i <= n; i++){
-            if (in[i] == n - 1 && out[i] == 0)
-                return i;
+            if (in[i] == n - 1 && out[i] == 0) return i;
         }
 
         return -1;
@@ -159,10 +158,8 @@ public class GraphsTaskUtil {
             weight.put(equation.get(1), 1.0);
         }
 
-        int equationCount = equations.size();
-
         // Perform union operations
-        for (int i = 0; i < equationCount; ++i) {
+        for (int i = 0; i < equations.size(); ++i) {
             List<String> equation = equations.get(i);
             String varA = equation.get(0);
             String varB = equation.get(1);
@@ -175,17 +172,15 @@ public class GraphsTaskUtil {
             }
         }
 
-        int queryCount = queries.size();
-        double[] answers = new double[queryCount];
+        double[] answers = new double[queries.size()];
 
         // Evaluate each query
-        for (int i = 0; i < queryCount; ++i) {
+        for (int i = 0; i < queries.size(); i++) {
             String varC = queries.get(i).get(0);
             String varD = queries.get(i).get(1);
             if (!parent.containsKey(varC) || !parent.containsKey(varD) ||
-                    !Objects.equals(find(varC, parent, weight), find(varD, parent, weight))) {
-                // If the variables do not belong to the same set, or at least one of the
-                // variables is not part of any equation, the answer is -1
+                !Objects.equals(find(varC, parent, weight), find(varD, parent, weight))
+            ) {
                 answers[i] = -1.0;
             } else {
                 answers[i] = weight.get(varC) / weight.get(varD);
@@ -202,6 +197,7 @@ public class GraphsTaskUtil {
             parent.put(x, find(parent.get(x), parent, weight)); // Path compression
             weight.put(x, weight.get(x) * weight.get(originalParent));
         }
+
         return parent.get(x);
     }
 }

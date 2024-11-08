@@ -21,11 +21,7 @@ public class UnionFind<T> {
 
     public T find(T x) {
         T y = map.getOrDefault(x, x);
-        if (y != x) {
-            y = find(y);
-            map.put(x, y);
-        }
-
+        if (y != x) map.put(x, find(y));
         return y;
     }
 
