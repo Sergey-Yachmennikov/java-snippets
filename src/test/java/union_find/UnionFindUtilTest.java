@@ -10,4 +10,9 @@ class UnionFindUtilTest {
     void run1() {
         UnionFindUtil.run1();
     }
+
+    @Test
+    void run2() {
+        UnionFindUtil.run2();
+    }
 }

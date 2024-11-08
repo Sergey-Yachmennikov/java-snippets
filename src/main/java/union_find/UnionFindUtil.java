@@ -1,5 +1,8 @@
 package union_find;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UnionFindUtil {
 
     private UnionFindUtil() {}
@@ -33,5 +36,16 @@ public class UnionFindUtil {
 
         System.out.println(isTheSameSet);
         System.out.println(ds.getParent());
+    }
+
+    public static void run2() {
+        List<Integer> integers = List.of(1, 2, 3, 4, 5);
+        UnionFind<Integer> uf = UnionFind.of(integers);
+        uf.union(3, 1);
+        uf.union(1, 0);
+        uf.union(5, 4);
+        uf.union(2, 0);
+        uf.find(5);
+        System.out.println(uf.getMap());
     }
 }

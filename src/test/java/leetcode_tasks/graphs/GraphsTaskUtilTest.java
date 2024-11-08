@@ -2,6 +2,8 @@ package leetcode_tasks.graphs;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -31,5 +33,25 @@ class GraphsTaskUtilTest {
     @Test
     void findMinHeightTrees() {
         assertEquals(1, GraphsTaskUtil.findMinHeightTrees(4, new int[][]{ {1, 0}, {1, 2}, {1, 3} }).getFirst());
+    }
+
+    @Test
+    void calcEquation() {
+        List<List<String>> equations = List.of(
+                List.of("a", "b"),
+                List.of("b", "c")
+        );
+
+        double[] values = new double[] { 2.0, 3.0 };
+
+        List<List<String>> queries = List.of(
+                List.of("a", "c"),
+                List.of("b", "a"),
+                List.of("a", "e"),
+                List.of("a", "a"),
+                List.of("x", "x")
+        );
+
+        assertArrayEquals(new double[] { 6.0, 0.5, -1.0, 1.0, -1.0 }, GraphsTaskUtil.calcEquation(equations, values, queries));
     }
 }
