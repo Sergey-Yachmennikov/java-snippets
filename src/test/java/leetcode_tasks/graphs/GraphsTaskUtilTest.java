@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GraphsTaskUtilTest {
 
@@ -53,5 +52,10 @@ class GraphsTaskUtilTest {
         );
 
         assertArrayEquals(new double[] { 6.0, 0.5, -1.0, 1.0, -1.0 }, GraphsTaskUtil.calcEquation(equations, values, queries));
+    }
+
+    @Test
+    void findCircleNum() {
+        assertEquals(2, GraphsTaskUtil.findCircleNum(new int[][] { {1, 1, 0}, {1, 1, 0}, {0, 1, 1} }));
     }
 }

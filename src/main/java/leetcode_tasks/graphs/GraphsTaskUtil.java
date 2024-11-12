@@ -159,7 +159,7 @@ public class GraphsTaskUtil {
         }
 
         // Perform union operations
-        for (int i = 0; i < equations.size(); ++i) {
+        for (int i = 0; i < equations.size(); i++) {
             List<String> equation = equations.get(i);
             String varA = equation.get(0);
             String varB = equation.get(1);
@@ -199,5 +199,29 @@ public class GraphsTaskUtil {
         }
 
         return parent.get(x);
+    }
+
+    public static int findCircleNum(int[][] isConnected) {
+        int count = 0;
+        boolean[] visited = new boolean[isConnected.length];
+
+        for (int i = 0; i < isConnected.length; i++) {
+            if (!visited[i]) {
+                count++;
+                circleDfs(i, visited, isConnected);
+            }
+        }
+
+        return count;
+    }
+
+    private static void circleDfs(int row, boolean[] visited, int[][] isConnected) {
+        visited[row] = true;
+
+        for (int j = 0; j < isConnected[row].length; j++) {
+            if (isConnected[row][j] == 1 && !visited[j]) {
+                circleDfs(j, visited, isConnected);
+            }
+        }
     }
 }
