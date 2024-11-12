@@ -239,14 +239,14 @@ public class GraphsTaskUtil {
         for (int i = 0; i < n; i++) {
             if (!visited[i]) {
                 componentsCount++;
-                countComponentsDfs(visited,adjList,i);
+                countComponentsDfs(visited, adjList, i);
             }
         }
 
         return componentsCount;
     }
 
-    private static void countComponentsDfs(boolean[] visited, List<List<Integer>> adjList,int node) {
+    private static void countComponentsDfs(boolean[] visited, List<List<Integer>> adjList, int node) {
         visited[node] = true;
         List<Integer> adjacentNodes = adjList.get(node);
 
@@ -262,7 +262,7 @@ public class GraphsTaskUtil {
 
         for (int[] edge : edges) {
             int root1 = findRoot(edge[0], roots);
-            int root2= findRoot(edge[1], roots);
+            int root2 = findRoot(edge[1], roots);
 
             if (root1 != root2) {
                 roots[root1] = root2;
