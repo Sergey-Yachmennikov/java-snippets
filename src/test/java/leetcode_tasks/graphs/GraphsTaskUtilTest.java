@@ -58,4 +58,14 @@ class GraphsTaskUtilTest {
     void findCircleNum() {
         assertEquals(2, GraphsTaskUtil.findCircleNum(new int[][] { {1, 1, 0}, {1, 1, 0}, {0, 1, 1} }));
     }
+
+    @Test
+    void countComponents() {
+        assertEquals(2, GraphsTaskUtil.countComponents(5, new int[][] { {0, 1}, {1, 2}, {3, 4} }));
+    }
+
+    @Test
+    void countComponentsUF() {
+        assertEquals(2, GraphsTaskUtil.countComponentsUF(5, new int[][] { {0, 1}, {1, 2}, {3, 4} }));
+    }
 }

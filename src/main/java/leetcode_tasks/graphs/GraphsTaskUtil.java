@@ -201,27 +201,84 @@ public class GraphsTaskUtil {
         return parent.get(x);
     }
 
-    public static int findCircleNum(int[][] isConnected) {
+    public static int findCircleNum(int[][] connections) {
         int count = 0;
-        boolean[] visited = new boolean[isConnected.length];
+        boolean[] visited = new boolean[connections.length];
 
-        for (int i = 0; i < isConnected.length; i++) {
+        for (int i = 0; i < connections.length; i++) {
             if (!visited[i]) {
                 count++;
-                circleDfs(i, visited, isConnected);
+                circleDfs(i, visited, connections);
             }
         }
 
         return count;
     }
 
-    private static void circleDfs(int row, boolean[] visited, int[][] isConnected) {
+    private static void circleDfs(int row, boolean[] visited, int[][] connections) {
         visited[row] = true;
 
-        for (int j = 0; j < isConnected[row].length; j++) {
-            if (isConnected[row][j] == 1 && !visited[j]) {
-                circleDfs(j, visited, isConnected);
+        for (int j = 0; j < connections[row].length; j++) {
+            if (connections[row][j] == 1 && !visited[j]) circleDfs(j, visited, connections);
+        }
+    }
+
+    public static int countComponents(int n, int[][] edges) {
+        boolean[] visited = new boolean[n];
+        List<List<Integer>> adjList = new ArrayList<>(n);
+
+        for (int i = 0; i < n; i++) adjList.add(new ArrayList<>());
+
+        for (int[] edge: edges) {
+            adjList.get(edge[0]).add(edge[1]);
+            adjList.get(edge[1]).add(edge[0]);
+        }
+
+        int componentsCount = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (!visited[i]) {
+                componentsCount++;
+                countComponentsDfs(visited,adjList,i);
             }
         }
+
+        return componentsCount;
+    }
+
+    private static void countComponentsDfs(boolean[] visited, List<List<Integer>> adjList,int node) {
+        visited[node] = true;
+        List<Integer> adjacentNodes = adjList.get(node);
+
+        for (int n: adjacentNodes) {
+            if (!visited[n]) countComponentsDfs(visited, adjList, n);
+        }
+    }
+
+    public static int countComponentsUF(int n, int[][] edges) {
+        int[] roots = new int[n];
+        for (int i = 0; i < n; i++) roots[i] = i;
+        int count = n;
+
+        for (int[] edge : edges) {
+            int root1 = findRoot(edge[0], roots);
+            int root2= findRoot(edge[1], roots);
+
+            if (root1 != root2) {
+                roots[root1] = root2;
+                count--;
+            }
+        }
+
+        return count;
+    }
+
+    public static int findRoot(int node, int[] roots) {
+        while (node != roots[node]) {
+            roots[node] = roots[roots[node]];
+            node = roots[node];
+        }
+
+        return node;
     }
 }
