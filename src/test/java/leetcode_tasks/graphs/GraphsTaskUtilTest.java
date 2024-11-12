@@ -68,4 +68,9 @@ class GraphsTaskUtilTest {
     void countComponentsUF() {
         assertEquals(2, GraphsTaskUtil.countComponentsUF(5, new int[][] { {0, 1}, {1, 2}, {3, 4} }));
     }
+
+    @Test
+    void findRedundantConnection() {
+        assertArrayEquals(new int[] {2, 3}, GraphsTaskUtil.findRedundantConnection(new int[][] { {1, 2}, {1, 3}, {2, 3} }));
+    }
 }
