@@ -317,6 +317,7 @@ public class GraphsTaskUtil {
             int ulp_u = findUPar(u);
             int ulp_v = findUPar(v);
             if(ulp_v == ulp_u) return false;
+
             if (size[ulp_u] < size[ulp_v]) {
                 parent[ulp_u] = ulp_v;
                 size[ulp_v] = size[ulp_u] + size[ulp_v];
