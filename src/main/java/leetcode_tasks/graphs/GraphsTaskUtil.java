@@ -382,4 +382,40 @@ public class GraphsTaskUtil {
 
         return res;
     }
+
+    // Dijkstra's
+    public static int networkDelayTimeDJ(int[][] times, int n, int k) {
+        // define graph table
+        Map<Integer, List<int[]>> graph = new HashMap<>();
+        for (int[] time: times) {
+            int source = time[0], target = time[1], weight = time[2];
+            if (!graph.containsKey(source)) graph.put(source, new LinkedList<>());
+            graph.get(source).add(new int[] { target, weight });
+        }
+
+        // define min heap
+        Queue<int[]> minHeap = new PriorityQueue<>(Comparator.comparingInt(a -> a[1]));
+
+        // define set of visited nodes
+        Set<Integer> visited = new HashSet<>();
+        minHeap.add(new int[] { k, 0 });
+        int res = 0;
+
+        // BFS
+        while (!minHeap.isEmpty()) {
+            int[] top = minHeap.poll();
+            int src = top[0], srcWeight = top[1];
+            if (visited.contains(src)) continue;
+            res = srcWeight;
+            visited.add(src);
+            if (!graph.containsKey(src)) continue;
+
+            for(int[] edge : graph.get(src)){
+                int tar = edge[0], tarWeight = edge[1];
+                minHeap.add(new int[]{ tar, srcWeight + tarWeight });
+            }
+        }
+
+        return visited.size() == n ? res : -1;
+    }
 }

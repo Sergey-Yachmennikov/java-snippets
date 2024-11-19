@@ -83,4 +83,9 @@ class GraphsTaskUtilTest {
     void networkDelayTimeBF() {
         assertEquals(2, GraphsTaskUtil.networkDelayTimeBF(new int[][] { {2, 1, 1}, {2, 3, 1}, {3, 4, 1} }, 4, 2));
     }
+
+    @Test
+    void networkDelayTimeDJ() {
+        assertEquals(2, GraphsTaskUtil.networkDelayTimeDJ(new int[][] { {2, 1, 1}, {2, 3, 1}, {3, 4, 1} }, 4, 2));
+    }
 }
