@@ -73,4 +73,14 @@ class GraphsTaskUtilTest {
     void findRedundantConnection() {
         assertArrayEquals(new int[] {2, 3}, GraphsTaskUtil.findRedundantConnection(new int[][] { {1, 2}, {1, 3}, {2, 3} }));
     }
+
+    @Test
+    void networkDelayTime() {
+        assertEquals(2, GraphsTaskUtil.networkDelayTime(new int[][] { {2, 1, 1}, {2, 3, 1}, {3, 4, 1} }, 4, 2));
+    }
+
+    @Test
+    void networkDelayTimeBF() {
+        assertEquals(2, GraphsTaskUtil.networkDelayTimeBF(new int[][] { {2, 1, 1}, {2, 3, 1}, {3, 4, 1} }, 4, 2));
+    }
 }

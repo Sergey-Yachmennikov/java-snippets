@@ -1,2 +1,4 @@
 https://fullstackdeveloper.guru/2022/09/28/data-structure-algorithms-in-java-graphs-number-of-connected-components-in-an-undirected-graph/
 https://algo.monster/liteproblems/684
+https://www.happycoders.eu/algorithms/dijkstras-algorithm-java/
+https://www.happycoders.eu/algorithms/a-star-algorithm-java/

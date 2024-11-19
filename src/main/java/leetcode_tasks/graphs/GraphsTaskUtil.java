@@ -329,4 +329,57 @@ public class GraphsTaskUtil {
             return true;
         }
     }
+
+    record Node(int i, int t) {}
+
+    /**
+     * @topic Dynamic Programming
+     */
+    public static int networkDelayTime(int[][] times, int n, int k) {
+        List<List<Node>> g = new ArrayList<>(n);
+        for (int i = 0; i < n; i++) g.add(new ArrayList<>());
+        for (var t : times) g.get(t[0] - 1).add(new Node(t[1] - 1, t[2]));
+
+        int[] time = new int[n];
+        Queue<Integer> q = new PriorityQueue<>(Comparator.comparingInt(u -> time[u]));
+        Arrays.fill(time, Integer.MAX_VALUE);
+        time[--k] = 0;
+        q.offer(k);
+
+        while (!q.isEmpty()) {
+            var cur = q.poll();
+            for (var next : g.get(cur)) {
+                int t2 = time[cur] + next.t;
+                if (t2 >= time[next.i]) continue;
+                time[next.i] = t2;
+                q.offer(next.i);
+            }
+        }
+
+        int res = time[0];
+        for (var t : time) if (t == Integer.MAX_VALUE) return -1; else if (t > res) res = t;
+
+        return res;
+    }
+
+    // Bellman Ford Algorithm
+    public static int networkDelayTimeBF(int[][] times, int n, int k) {
+        int[] time = new int[n + 1];
+        Arrays.fill(time, Integer.MAX_VALUE);
+        time[k] = time[0] = 0;
+
+        for (int i = 1; i < n; i++) {
+            boolean canRelax = false;
+            for (var e : times) if (time[e[0]] + e[2] < time[e[1]]) {
+                time[e[1]] = time[e[0]] + e[2];
+                canRelax = true;
+            }
+            if (!canRelax) break;
+        }
+
+        int res = time[1];
+        for (var t : time) if (t == Integer.MAX_VALUE) return -1; else if (t > res) res = t;
+
+        return res;
+    }
 }
