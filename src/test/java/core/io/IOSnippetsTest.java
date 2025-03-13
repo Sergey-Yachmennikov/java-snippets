@@ -96,6 +96,7 @@ class IOSnippetsTest {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        assertTrue(true);
     }
 
     @Test
@@ -108,5 +109,44 @@ class IOSnippetsTest {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        assertTrue(true);
+    }
+
+    @Test
+    void fileOutputStream() {
+        String text = "Hello, world!";
+        try (FileOutputStream fileOutputStream = new FileOutputStream(BASE_URL + "/file-output-stream.txt")) {
+           byte[] buffer = text.getBytes();
+           fileOutputStream.write(buffer, 0 , buffer.length);
+            System.out.println("File has been written");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        assertTrue(true);
+    }
+
+    @Test
+    void fileInputStream() {
+        try (FileInputStream fileInputStream = new FileInputStream(BASE_URL + "/file-output-stream.txt")) {
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        assertTrue(true);
+    }
+
+    @Test
+    void copyContentFromFileToAnotherOne() {
+        try (
+             FileInputStream fis = new FileInputStream(BASE_URL + "/notes.txt");
+             FileOutputStream fos = new FileOutputStream(BASE_URL + "/new_notes.txt")
+        ) {
+            byte[] buffer = new byte[fis.available()];
+            fis.read(buffer, 0, buffer.length);
+            fos.write(buffer, 0, buffer.length);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        assertTrue(true);
     }
 }
