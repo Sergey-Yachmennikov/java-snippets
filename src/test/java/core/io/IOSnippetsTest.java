@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -147,6 +148,43 @@ class IOSnippetsTest {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        assertTrue(true);
+    }
+
+    @Test
+    void scannerTest1() {
+        Scanner scanner = new Scanner("Dick1\n" + "Dick2\n" + "Dick3\n" );
+        while (scanner.hasNext()) {
+            String s = scanner.nextLine();
+            System.out.println(s);
+        }
+
+        assertTrue(true);
+    }
+
+    @Test
+    void objectSerialization() {
+        User user = new User();
+        user.setName("Test");
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(BASE_URL + "/object.txt"))) {
+            oos.writeObject(user);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        assertTrue(true);
+    }
+
+    @Test
+    void objectDeserialization() {
+        try (ObjectInputStream oos = new ObjectInputStream(new FileInputStream(BASE_URL + "/object.txt"))) {
+            User user = (User) oos.readObject();
+            System.out.println(user);
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
         assertTrue(true);
     }
 }
