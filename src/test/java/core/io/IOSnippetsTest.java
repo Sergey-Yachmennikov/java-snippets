@@ -3,9 +3,14 @@ package core.io;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.Channel;
+import java.nio.channels.FileChannel;
+import java.nio.channels.SeekableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -65,8 +70,11 @@ class IOSnippetsTest {
     void showFolderFiles() {
         File folder = new File(FOLDER);
         File[] files = folder.listFiles();
+        String[] fileNames = folder.list();
+        System.out.println(Arrays.toString(fileNames));
         System.out.println(Arrays.toString(files));
-        assertTrue(true);
+
+        assertEquals(3, fileNames.length);
     }
 
     @Test
@@ -182,6 +190,34 @@ class IOSnippetsTest {
             User user = (User) oos.readObject();
             System.out.println(user);
         } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        assertTrue(true);
+    }
+
+    @Test
+    void getFreeSpace() {
+     File file = new File(BASE_URL + "/object.txt");
+     System.out.println(file.getAbsoluteFile());
+     System.out.println(file.getFreeSpace());
+     assertTrue(true);
+    }
+
+    ///  NIO
+    @Test
+    void writeToFileFromChannel() {
+        try (FileChannel channel = (FileChannel) Files.newByteChannel(Paths.get(BASE_URL + "/channel.txt"), StandardOpenOption.WRITE, StandardOpenOption.CREATE)) {
+            ByteBuffer buffer = ByteBuffer.allocate(26);
+
+            for (int i = 0; i < buffer.capacity(); i++) {
+                buffer.put((byte) ('A' + i));
+            }
+
+            buffer.rewind();
+            channel.write(buffer);
+
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
