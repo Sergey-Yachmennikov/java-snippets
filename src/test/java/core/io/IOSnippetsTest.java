@@ -223,4 +223,36 @@ class IOSnippetsTest {
 
         assertTrue(true);
     }
+
+    @Test
+    void dataOutputStream() {
+        // запись в файл
+        try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(BASE_URL + "/data.txt")))
+        {
+            // записываем значения
+            dos.writeUTF("dick");
+            dos.writeInt(16);
+            dos.writeDouble(15.4);
+            dos.writeBoolean(true);
+            System.out.println("File has been written");
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @Test
+    void dataInputStream() {
+        // чтение из файла
+        try (DataInputStream dos = new DataInputStream(new FileInputStream(BASE_URL + "/data.txt"))) {
+            // чтение из файла
+            String name = dos.readUTF();
+
+            int a = dos.readInt();
+            double b = dos.readDouble();
+            boolean c = dos.readBoolean();
+            System.out.println("Values: " + name + " " + a + " " + b + " " + c);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
