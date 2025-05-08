@@ -2,7 +2,9 @@ package miltithreading;
 
 import org.junit.jupiter.api.Test;
 
-public class MiltithreadingExampleTest {
+import java.util.concurrent.locks.ReentrantLock;
+
+class MiltithreadingExampleTest {
 
     @Test
     void storeTest() {
@@ -12,5 +14,17 @@ public class MiltithreadingExampleTest {
 
         new Thread(producer).start();
         new Thread(consumer).start();
+    }
+
+    @Test
+    void lockTest() {
+        CommonResource commonResource = new CommonResource();
+        ReentrantLock locker = new ReentrantLock();
+
+        for (int i = 0; i < 6; i++) {
+            Thread thread = new Thread(new CountThread(commonResource, locker));
+            thread.setName("Thread " + i);
+            thread.start();
+        }
     }
 }
