@@ -1,7 +1,9 @@
 package miltithreading;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -133,5 +135,72 @@ class MiltithreadingExampleTest {
 
         thread1.start();
         thread2.start();
+    }
+
+    @Test
+    @Disabled
+    void joinDeadlockTest() {
+        final Thread[] threads = new Thread[2];  // Массив для хранения ссылок на потоки
+
+        threads[0] = new Thread(() -> {
+            try {
+                threads[1].join();  // Первый поток ждёт завершения второго
+                System.out.println("Поток 1 завершил работу");
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
+
+        threads[1] = new Thread(() -> {
+            try {
+                threads[0].join();  // Второй поток ждёт завершения первого
+                System.out.println("Поток 2 завершил работу");
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
+
+        threads[0].start();
+        threads[1].start();
+
+        try {
+            threads[0].join();
+            threads[1].join();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        System.out.println("Главный поток завершился");
+    }
+
+    @Test
+    void deadlockWithPoolTest() throws ExecutionException, InterruptedException {
+        final ExecutorService pool = Executors.newFixedThreadPool(1); // не хватает потоков для обработки
+
+        Future<?> future = pool.submit(() -> {
+            System.out.println("Задача 1 запущена");
+
+            // Пытаемся отправить вторую задачу в ТОТ ЖЕ пул
+            Future<?> nestedFuture = pool.submit(() -> {
+                System.out.println("Задача 2 запущена");
+                return "Результат";
+            });
+
+            try {
+                // Ждём завершения вложенной задачи -> DEADLOCK!
+                System.out.println("Задача 1 ждёт результат Задачи 2...");
+                nestedFuture.get();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("Задача 1 завершена");
+            return "Готово";
+        });
+
+        // Основной поток ждёт завершения первой задачи
+        future.get();
+        System.out.println("Основной поток завершён");
+        pool.shutdown();
     }
 }
