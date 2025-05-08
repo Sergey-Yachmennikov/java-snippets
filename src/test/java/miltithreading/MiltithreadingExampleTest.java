@@ -27,4 +27,33 @@ class MiltithreadingExampleTest {
             thread.start();
         }
     }
+
+    @Test
+    void boundedBufferTest() {
+        BoundedBuffer<Integer> buffer = new BoundedBuffer<>(5);
+
+        // Producer
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    buffer.put(i);
+                    System.out.println("Produced: " + i);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }).start();
+
+        // Consumer
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    int item = buffer.take();
+                    System.out.println("Consumed: " + item);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }).start();
+    }
 }
