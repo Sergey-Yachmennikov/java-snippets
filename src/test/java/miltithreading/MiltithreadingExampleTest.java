@@ -203,4 +203,118 @@ class MiltithreadingExampleTest {
         System.out.println("Основной поток завершён");
         pool.shutdown();
     }
+
+    @Test
+    void livelockBaseTest() {
+        class Person {
+            private final String name;
+            private boolean sideLeft = true;
+
+            public Person(String name) {
+                this.name = name;
+            }
+
+            public boolean isSideLeft() {
+                return sideLeft;
+            }
+
+            public void switchSide() {
+                sideLeft = !sideLeft;
+            }
+        }
+
+        final Person person1 = new Person("Alice");
+        final Person person2 = new Person("Bob");
+
+        Thread t1 = new Thread(() -> {
+            while (person1.isSideLeft() == person2.isSideLeft()) {
+                System.out.println("Alice sees Bob on same side, switching...");
+                person1.switchSide();
+                try { Thread.sleep(100); } catch (InterruptedException ignored) {}
+            }
+            System.out.println("Alice passed.");
+        });
+
+        Thread t2 = new Thread(() -> {
+            while (person1.isSideLeft() == person2.isSideLeft()) {
+                System.out.println("Bob sees Alice on same side, switching...");
+                person2.switchSide();
+                try { Thread.sleep(100); } catch (InterruptedException ignored) {}
+            }
+            System.out.println("Bob passed.");
+        });
+
+        t1.start();
+        t2.start();
+    }
+
+    @Test
+    void livelockReentrantLockTest() {
+         class SharedResource {
+            private final ReentrantLock lock = new ReentrantLock();
+
+            public boolean tryLock(String name) {
+                boolean success = lock.tryLock();
+                if (success) {
+                    System.out.println(name + " acquired lock.");
+                }
+                return success;
+            }
+
+            public void unlock(String name) {
+                lock.unlock();
+                System.out.println(name + " released lock.");
+            }
+        }
+
+        SharedResource resource1 = new SharedResource();
+        SharedResource resource2 = new SharedResource();
+
+        Thread t1 = new Thread(() -> {
+            while (true) {
+                if (resource1.tryLock("Thread-1")) {
+                    try {
+                        try { Thread.sleep(50); } catch (InterruptedException ignored) {}
+                        if (resource2.tryLock("Thread-1")) {
+                            try {
+                                System.out.println("Thread-1: Acquired both locks, working...");
+                                break;
+                            } finally {
+                                resource2.unlock("Thread-1");
+                            }
+                        }
+                    } finally {
+                        resource1.unlock("Thread-1");
+                    }
+                }
+                // Уступаем, чтобы другой поток смог сделать попытку
+                try { Thread.sleep(50); } catch (InterruptedException ignored) {}
+            }
+        });
+
+
+        Thread t2 = new Thread(() -> {
+            while (true) {
+                if (resource2.tryLock("Thread-2")) {
+                    try {
+                        try { Thread.sleep(50); } catch (InterruptedException ignored) {}
+                        if (resource1.tryLock("Thread-2")) {
+                            try {
+                                System.out.println("Thread-2: Acquired both locks, working...");
+                                break;
+                            } finally {
+                                resource1.unlock("Thread-2");
+                            }
+                        }
+                    } finally {
+                        resource2.unlock("Thread-2");
+                    }
+                }
+                try { Thread.sleep(50); } catch (InterruptedException ignored) {}
+            }
+        });
+
+        t1.start();
+        t2.start();
+    }
 }
