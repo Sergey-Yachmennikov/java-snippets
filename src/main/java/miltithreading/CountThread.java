@@ -1,13 +1,13 @@
 package miltithreading;
 
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.Lock;
 
 public class CountThread implements Runnable {
 
     CommonResource resource;
-    ReentrantLock locker;
+    Lock locker;
 
-    public CountThread(CommonResource resource, ReentrantLock lock) {
+    public CountThread(CommonResource resource, Lock lock) {
         this.resource = resource;
         this.locker = lock;
     }
