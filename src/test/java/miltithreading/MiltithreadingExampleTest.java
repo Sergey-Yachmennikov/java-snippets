@@ -317,4 +317,46 @@ class MiltithreadingExampleTest {
         t1.start();
         t2.start();
     }
+
+    @Test
+    void starvationTest() {
+        ReentrantLock unfairLock = new ReentrantLock();
+
+        Runnable starvingTask = () -> {
+            while (true) {
+                unfairLock.lock();
+                try {
+                    System.out.println(Thread.currentThread().getName() + " working");
+                    Thread.sleep(50);
+                } catch (InterruptedException ignored) {} finally {
+                    unfairLock.unlock();
+                }
+            }
+        };
+
+        Thread fastThread = new Thread(starvingTask, "FastThread");
+        Thread slowThread = new Thread(starvingTask, "SlowThread");
+
+        fastThread.setPriority(Thread.MAX_PRIORITY); // очень высокий приоритет
+        slowThread.setPriority(Thread.MIN_PRIORITY); // низкий приоритет
+
+        fastThread.start();
+        slowThread.start();
+    }
+
+    @Test
+    void fixedExecutorServiceTest() {
+        int cores = Runtime.getRuntime().availableProcessors();
+        ExecutorService executor = Executors.newFixedThreadPool(cores); // LinkedBlockingQueue
+        // Executors.newSingleThreadExecutor() // LinkedBlockingQueue
+        // Executors.newCachedThreadPool() // SynchronousQueue
+        // Executors.newScheduledThreadPool(1) // DelayedWorkQueue
+
+        for (int i = 0; i < cores; i++) {
+            int taskId = i;
+            executor.submit(() -> System.out.println("Running task " + taskId + " on thread " + Thread.currentThread().getName()));
+        }
+
+        executor.shutdown();
+    }
 }
