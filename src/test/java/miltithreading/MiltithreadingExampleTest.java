@@ -359,4 +359,17 @@ class MiltithreadingExampleTest {
 
         executor.shutdown();
     }
+
+    @Test
+    void threadLocalTest() {
+        ThreadLocal<Integer> threadLocal = ThreadLocal.withInitial(() -> 0);
+
+        Runnable task = () -> {
+            threadLocal.set((int) (Math.random() * 100));
+            System.out.println(Thread.currentThread().getName() + " → " + threadLocal.get());
+        };
+
+        new Thread(task).start();
+        new Thread(task).start();
+    }
 }
