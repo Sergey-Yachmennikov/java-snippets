@@ -2,11 +2,8 @@ package stream;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Stream;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class StreamExamplesTest {
@@ -130,5 +127,43 @@ class StreamExamplesTest {
                 })
                 .forEach(System.out::println);
         // Apple, APPLE, Banana, BANANA
+    }
+
+    @Test
+    void spliteratorTest() {
+        Spliterator<String> spliterator = Arrays.asList("A", "B", "C", "D", "E").spliterator();
+
+        Spliterator<String> firstHalf = spliterator.trySplit();
+
+        System.out.println(firstHalf.characteristics());
+
+        System.out.println("first half");
+        firstHalf.forEachRemaining(System.out::println); // обрабатываем первую часть
+        System.out.println("----");
+        System.out.println("second half");
+        spliterator.forEachRemaining(System.out::println); // обрабатываем вторую часть
+    }
+
+    @Test
+    void customSpliteratorTest() {
+        Date date = new Date();
+        Messages messages = new Messages();
+
+        List.of(
+            new MessageRecord(1, date, "Hello"),
+            new MessageRecord(2, date, "World"),
+            new MessageRecord(3, date, "Java The Best"),
+            new MessageRecord(4, date, "Cat"),
+            new MessageRecord(5, date, "Hello John"),
+            new MessageRecord(6, date, "Java The Best"),
+            new MessageRecord(7, date, "Buy Katty"),
+            new MessageRecord(8, date, "I choose Rust")
+        ).forEach(messages::addMessageRecord);
+
+        Spliterator<MessageRecord> spliterator = messages.getSpliterator();
+
+        for (;spliterator.tryAdvance(System.out::println);) {
+            System.out.println(spliterator.estimateSize());
+        }
     }
 }

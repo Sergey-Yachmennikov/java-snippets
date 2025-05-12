@@ -13,9 +13,10 @@ public class FibonacciTask extends RecursiveTask<Long> {
         if (n <= 10) { // Базовый случай
             return sequentialFibonacci(n);
         }
+
         FibonacciTask f1 = new FibonacciTask(n - 1);
         f1.fork(); // Асинхронный запуск подзадачи
-
+        // левая часть запукается в отдельном потоке, а текущий поток обрабатывает правую часть
         FibonacciTask f2 = new FibonacciTask(n - 2);
         return f2.compute() + f1.join(); // Объединение результатов
     }
