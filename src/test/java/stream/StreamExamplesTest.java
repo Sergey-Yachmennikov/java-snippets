@@ -3,6 +3,7 @@ package stream;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -165,5 +166,38 @@ class StreamExamplesTest {
         for (;spliterator.tryAdvance(System.out::println);) {
             System.out.println(spliterator.estimateSize());
         }
+    }
+
+    @Test
+    void teeingExample() {
+        List<Integer> numbers = List.of(10, 20, 30, 40);
+
+        // Вычисляем сумму и среднее, затем объединяем в строку
+        String result = numbers.stream()
+                .collect(
+                    Collectors.teeing(
+                            Collectors.summingInt(Integer::intValue),  // Сумма (10+20+30+40 = 100)
+                            Collectors.averagingDouble(Integer::intValue),  // Среднее (100/4 = 25.0)
+                            (sum, avg) -> "Сумма: " + sum + ", Среднее: " + avg
+                    )
+        );
+
+        System.out.println(result);
+    }
+
+    @Test
+    void teeingExample2() {
+        List<String> names = List.of("Alice", "Bob", "Anna", "Alex");
+
+        // Разделяем имена на две группы: начинающиеся на "A" и остальные
+        Map<String, List<String>> result = names.stream().collect(
+                Collectors.teeing(
+                        Collectors.filtering(name -> name.startsWith("A"), Collectors.toList()),  // ["Alice", "Anna", "Alex"]
+                        Collectors.filtering(name -> !name.startsWith("A"), Collectors.toList()), // ["Bob"]
+                        (startsWithA, others) -> Map.of("A", startsWithA, "Others", others)
+                )
+        );
+
+        System.out.println(result);
     }
 }
