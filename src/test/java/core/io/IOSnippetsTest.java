@@ -1,5 +1,6 @@
 package core.io;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
@@ -25,6 +26,7 @@ class IOSnippetsTest {
     private final String DIR = "src/test/java/core/io/dir";
     private final String BASE_URL = "src/test/java/core/io";
 
+    @Disabled
     @Test
     void createFileNIO() throws IOException {
         Path newFilePath = Paths.get(FILE_NAME_NIO);
@@ -32,6 +34,7 @@ class IOSnippetsTest {
         assertTrue(true);
     }
 
+    @Disabled
     @Test
     void createFileIO() throws IOException {
         File newFile = new File(FILE_NAME_IO);

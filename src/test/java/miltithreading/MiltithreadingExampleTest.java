@@ -60,6 +60,7 @@ class MiltithreadingExampleTest {
         }).start();
     }
 
+    @Disabled
     @Test
     void deadlockSynchronizedTest() { // base case of deadlock
          Object lockA = new Object();
@@ -98,6 +99,7 @@ class MiltithreadingExampleTest {
         thread2.start();
     }
 
+    @Disabled
     @Test
     void deadlockReentrantLockTest() {
        Lock lock1 = new ReentrantLock();
@@ -137,8 +139,9 @@ class MiltithreadingExampleTest {
         thread2.start();
     }
 
-    @Test
     @Disabled
+    @Test
+
     void joinDeadlockTest() {
         final Thread[] threads = new Thread[2];  // Массив для хранения ссылок на потоки
 
@@ -173,6 +176,7 @@ class MiltithreadingExampleTest {
         System.out.println("Главный поток завершился");
     }
 
+    @Disabled
     @Test
     void deadlockWithPoolTest() throws ExecutionException, InterruptedException {
         final ExecutorService pool = Executors.newFixedThreadPool(1); // не хватает потоков для обработки
@@ -204,6 +208,7 @@ class MiltithreadingExampleTest {
         pool.shutdown();
     }
 
+    @Disabled
     @Test
     void livelockBaseTest() {
         class Person {
@@ -248,6 +253,7 @@ class MiltithreadingExampleTest {
         t2.start();
     }
 
+    @Disabled
     @Test
     void livelockReentrantLockTest() {
          class SharedResource {

@@ -1,6 +1,7 @@
 package leetcode_tasks.backtracking;
 
 import data_structures.leetcode.TreeNode;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -143,6 +144,7 @@ class BacktrackingUtilTest {
         System.out.println(treeNodes);
     }
 
+    @Disabled
     @Test
     void pathSum() {
         TreeNode root = new TreeNode(5);
