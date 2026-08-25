@@ -58,7 +58,7 @@ public class MyLinkedList<T> {
     public boolean contains(T value) {
         Node<T> current = head;
         while (current != null) {
-            if (current.data == value) {
+            if (current.data.equals(value)) {
                 return true;
             }
             current = current.next;

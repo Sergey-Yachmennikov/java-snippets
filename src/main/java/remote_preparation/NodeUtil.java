@@ -2,7 +2,6 @@ package remote_preparation;
 
 public abstract class NodeUtil {
 
-    private NodeUtil() {}
 
     public static <T> NodeV2<T> reverse(NodeV2<T> node) {
         NodeV2<T> prev = null;
@@ -13,7 +12,6 @@ public abstract class NodeUtil {
             current.next = prev;             // разворачиваем ссылку у текущего узла
             prev = current;                  // сдвигаем prev вперёд
             current = next;                  // сдвигаем current вперёд
-            System.out.println(prev);
         }
 
         return prev; // prev теперь указывает на новую голову списка

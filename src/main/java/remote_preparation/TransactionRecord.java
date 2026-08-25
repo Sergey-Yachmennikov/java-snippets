@@ -1,5 +1,6 @@
 package remote_preparation;
 
+
 record TransactionRecord(
         String id,
         double amount,

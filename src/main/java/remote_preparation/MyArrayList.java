@@ -1,8 +1,6 @@
 package remote_preparation;
 
 
-import java.util.Arrays;
-
 public class MyArrayList<T> {
 
     private Object[] elements;

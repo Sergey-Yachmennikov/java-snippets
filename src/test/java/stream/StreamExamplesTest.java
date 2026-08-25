@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -200,4 +201,142 @@ class StreamExamplesTest {
 
         System.out.println(result);
     }
+
+    @Test
+    void ofNullable() {
+        var strings = Stream.of("", "1", "2", "4", "4");
+        String[] array = strings.toArray(String[]::new);
+        System.out.println(Arrays.toString(array));
+    }
+
+    static class City {
+        private String name;
+
+        public City(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
+
+    static class Address {
+        private City city;
+
+        public Address(City city) {
+            this.city = city;
+        }
+
+        public Optional<City> getCity() {
+            return Optional.ofNullable(city);
+        }
+    }
+
+    static class User {
+        private Address address;
+
+        public User(Address address) {
+            this.address = address;
+        }
+
+        public Optional<Address> getAddress() {
+            return Optional.ofNullable(address);
+        }
+    }
+
+    @Test
+    void optionalFields() {
+        City yerevan = new City("Yerevan");
+        Address address = new Address(yerevan);
+        User userObject = new User(null);
+        Optional<User> user = Optional.of(userObject);
+
+        Optional<String> cityName = user
+                        .flatMap(User::getAddress)
+                        .flatMap(Address::getCity)
+                        .map(City::getName);
+
+        cityName.ifPresent(System.out::println);
+    }
+
+    static class Userless {
+        private String name;
+        private int age;
+
+        public Userless(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+    }
+
+    @Test
+    void userlessTest() {
+        List<Userless> users = List.of(
+                new Userless("John", 25),
+                new Userless("Alice", 17),
+                new Userless("Bob", 32),
+                new Userless("Mike", 15),
+                new Userless("Sarah", 21),
+                new Userless("Tom", 14)
+        );
+
+        Map<Boolean, Long> collect = users.stream()
+                .collect(
+                        Collectors.partitioningBy(user -> user.getAge() >= 18,
+                        Collectors.counting()
+                    )
+                );
+
+        System.out.println(collect.get(true));
+        System.out.println(collect.get(false));
+    }
+
+    static class Uzer {
+        int age;
+        String firstName;
+        String lastName;
+
+        public int getAge() {
+            return age;
+        }
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
+    }
+
+    static class Room {
+        int number;
+        List<Uzer> users;
+
+        public int getNumber() {
+            return number;
+        }
+
+        public List<Uzer> getUsers() {
+            return users;
+        }
+    }
+
+    @Test
+    void uzerRoomTest() {
+        IntStream.of(5, 3, 1)
+                .boxed()
+                .sorted(Comparator.reverseOrder())
+                .toList();
+    }
+
 }
