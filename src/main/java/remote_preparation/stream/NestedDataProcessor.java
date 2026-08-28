@@ -9,7 +9,6 @@ public class NestedDataProcessor {
 
         int sum = data.stream()
                 .flatMapToInt(line -> Arrays.stream(line.split(","))
-                        .peek(v -> System.out.println(((Object) v).getClass().getPackageName()))
                         .mapToInt(Integer::parseInt))
                 .sum();
     }

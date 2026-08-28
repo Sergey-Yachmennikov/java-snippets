@@ -29,7 +29,7 @@ public class MyArrayList<T> {
 
     public void remove(int index) {
         checkIndex(index);
-        int movedElementCount = size - index - 1;
+        int movedElementCount = size - 1 - index;
         if (movedElementCount > 0) {
             System.arraycopy(elements, index + 1, elements, index, movedElementCount);
         } else {

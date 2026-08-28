@@ -9,10 +9,5 @@ public class UpperCaseConverter {
         Arrays.stream(words)
                 .map(String::toUpperCase)
                 .forEach(System.out::println);
-
-        String vlad = "vlad";
-        if (vlad == "pidaras") {
-            System.out.println("That's true"); // true
-        }
     }
 }
