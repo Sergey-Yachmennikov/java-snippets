@@ -21,11 +21,12 @@ public class PingPongWaitNotify {
         pong.join();
     }
 
-    private void play(String message, boolean isPing) {
+    public void play(String message, boolean isPing) {
         for (int i = 0; i < iterations; i++) {
             synchronized (lock) {
                 while (pingTurn != isPing) {       // while, не if!
                     try {
+                        System.out.println(message);
                         lock.wait();
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
@@ -34,6 +35,7 @@ public class PingPongWaitNotify {
                 }
 
                 pingTurn = !pingTurn;
+                System.out.println(message);
                 lock.notifyAll();
             }
         }
