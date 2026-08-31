@@ -24,7 +24,7 @@ public class PingPongSimplified {
                     }
                     System.out.println("ping");
                     isPingTurn = false;
-                    lock.notify();
+                    lock.notifyAll();
 
                 }
             }
@@ -44,7 +44,7 @@ public class PingPongSimplified {
 
                     System.out.println("pong");
                     isPingTurn = true;
-                    lock.notify();
+                    lock.notifyAll();
                 }
             }
         });
