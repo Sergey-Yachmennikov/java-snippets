@@ -27,10 +27,11 @@ public class LoadBalanceService {
         if (strategy == null) {
             throw new IllegalArgumentException("Strategy cannot be null");
         }
+
         this.strategy = strategy;
     }
 
-    public URI selectServiceInstance() throws NoInstancesAvailableException{
+    public URI selectServiceInstance() throws NoInstancesAvailableException {
         lock.readLock().lock();
         try {
             if (serviceInstances.isEmpty()) {
