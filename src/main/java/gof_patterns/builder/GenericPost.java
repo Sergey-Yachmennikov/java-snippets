@@ -1,4 +1,4 @@
-package patterns.builder;
+package gof_patterns.builder;
 
 public class GenericPost {
     private String title;

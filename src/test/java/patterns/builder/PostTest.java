@@ -1,5 +1,8 @@
 package patterns.builder;
 
+import gof_patterns.builder.GenericBuilder;
+import gof_patterns.builder.GenericPost;
+import gof_patterns.builder.Post;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

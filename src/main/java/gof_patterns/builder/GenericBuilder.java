@@ -1,4 +1,4 @@
-package patterns.builder;
+package gof_patterns.builder;
 
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
