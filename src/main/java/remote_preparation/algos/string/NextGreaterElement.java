@@ -2,7 +2,7 @@ package remote_preparation.algos.string;
 
 import java.util.Arrays;
 import java.util.Stack;
-
+// @complicated
 public class NextGreaterElement {
 
     public static void main(String[] args) {

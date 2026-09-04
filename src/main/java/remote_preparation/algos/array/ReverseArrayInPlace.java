@@ -7,7 +7,7 @@ import java.util.Arrays;
 // срез без выделения дополнительной памяти. Используй два указателя — left и right.
 // Объясни: почему срез изменится в вызывающем коде, а не его копия?
 // Пример: [1,2,3,4,5] -> [5,4,3,2,1]
-public class ReverseArray {
+public class ReverseArrayInPlace {
 
     public static void main(String[] args) {
         int[] nums = {1, 2, 3, 4, 5};
@@ -26,12 +26,15 @@ public class ReverseArray {
         int right = nums.length - 1;
 
         while (left < right) {
-            int temp = nums[left];
-            nums[left] = nums[right];
-            nums[right] = temp;
-
+            swap(nums, left, right);
             left++;
             right--;
         }
+    }
+
+    public static void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
     }
 }

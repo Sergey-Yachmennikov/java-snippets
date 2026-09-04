@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+// @repeat
 public class ThreeSum {
 
     public static void main(String[] args) {

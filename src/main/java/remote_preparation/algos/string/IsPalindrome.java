@@ -7,7 +7,7 @@ public class IsPalindrome {
 
         int left = 0;
         int right = codePoints.length - 1;
-
+        // в цикле for потребовалось бы явно итерироваться до середины массива
         while (left < right) {
             if (codePoints[left] != codePoints[right]) {
                 return false;

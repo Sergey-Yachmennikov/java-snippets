@@ -2,6 +2,7 @@ package remote_preparation.algos.array;
 
 import java.util.Arrays;
 
+// @repeat
 public class SortColors {
 
     public static void main(String[] args) {

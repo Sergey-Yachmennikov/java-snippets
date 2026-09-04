@@ -7,6 +7,7 @@ import java.util.Map;
 // Задача 1 — «Two Sum»
 // Напиши функцию TwoSum(nums []int, target int) []int, которая возвращает индексы двух чисел,
 // сумма которых равна target. Используй map[int]int для решения за O(n).
+// formula: x + y = target
 public class TwoSums {
 
     public static void main(String[] args) {
@@ -22,14 +23,14 @@ public class TwoSums {
         Map<Integer, Integer> indexes = new HashMap<>();
 
         for (int i = 0; i < nums.length; i++) {
-            int current = nums[i];
-            int complement = target - current;
+            int x = nums[i];
+            int y = target - x;
 
-            if (indexes.containsKey(complement)) {
-                return new int[] {indexes.get(complement), i};
+            if (indexes.containsKey(y)) {
+                return new int[] {indexes.get(y), i};
             }
 
-            indexes.put(current, i);
+            indexes.put(x, i);
         }
 
         return new int[0];

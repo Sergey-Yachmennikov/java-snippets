@@ -2,6 +2,7 @@ package remote_preparation.algos.string;
 
 import java.util.Stack;
 
+// @complicated
 public class DecodeString {
 
     public static void main(String[] args) {

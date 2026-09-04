@@ -1,7 +1,7 @@
 package remote_preparation.algos.array;
 
 import java.util.Arrays;
-
+// @repeat
 public class RemoveDuplicatesInSortesArray {
 
     public static void main(String[] args) {

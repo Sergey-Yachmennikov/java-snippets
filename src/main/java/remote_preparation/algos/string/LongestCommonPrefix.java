@@ -1,5 +1,6 @@
 package remote_preparation.algos.string;
 
+// @repeat
 public class LongestCommonPrefix {
 
     public static void main(String[] args) {

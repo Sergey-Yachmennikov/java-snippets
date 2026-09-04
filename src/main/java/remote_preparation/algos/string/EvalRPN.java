@@ -1,7 +1,7 @@
 package remote_preparation.algos.string;
 
 import java.util.Stack;
-
+// @repeat
 public class EvalRPN {
 
     public static void main(String[] args) {
@@ -9,8 +9,8 @@ public class EvalRPN {
         String[] tokens2 = {"4", "13", "5", "/", "+"};
         String[] tokens3 = {"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"};
 
-        System.out.println(evalRPN(tokens1));
-        System.out.println(evalRPN(tokens2));
+//        System.out.println(evalRPN(tokens1));
+//        System.out.println(evalRPN(tokens2));
         System.out.println(evalRPN(tokens3));
     }
 

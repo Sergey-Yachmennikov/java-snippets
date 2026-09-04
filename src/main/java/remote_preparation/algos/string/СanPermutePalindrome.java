@@ -1,4 +1,4 @@
-package remote_preparation.algos.array;
+package remote_preparation.algos.string;
 
 import java.util.HashMap;
 import java.util.Map;
