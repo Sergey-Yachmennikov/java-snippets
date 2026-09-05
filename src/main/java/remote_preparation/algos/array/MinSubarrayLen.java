@@ -1,5 +1,6 @@
 package remote_preparation.algos.array;
 
+// @repeat @dynamicSlidingWindow
 public class MinSubarrayLen {
 
     static int minSubarrayLen(int target, int[] nums) {
