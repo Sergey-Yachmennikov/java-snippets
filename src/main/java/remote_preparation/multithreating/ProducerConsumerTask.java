@@ -8,10 +8,10 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
-
+// @priority
 public class ProducerConsumerTask {
 
-    static final Integer POISON_PILL = Integer.MIN_VALUE;
+    static final int POISON_PILL = Integer.MIN_VALUE;
 
     public static void main(String[] args) throws InterruptedException {
         BlockingQueue<Integer> queue = new LinkedBlockingQueue<>(10);

@@ -2,7 +2,7 @@ package remote_preparation.multithreating;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadLocalRandom;
-
+// @priority
 public class WorkersTask {
 
     public static void main(String[] args) throws InterruptedException {

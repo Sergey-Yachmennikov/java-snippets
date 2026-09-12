@@ -2,7 +2,7 @@ package remote_preparation.multithreating;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
-
+// @priority
 public class PingPongLockSimplified {
 
     private static final ReentrantLock lock = new ReentrantLock();

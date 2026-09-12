@@ -60,3 +60,7 @@ public class PingPongSimplified {
         }
     }
 }
+
+// 2 threads with loop inside
+// turn flag
+// start + join
