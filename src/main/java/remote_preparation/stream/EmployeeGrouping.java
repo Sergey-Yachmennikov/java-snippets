@@ -6,6 +6,26 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+// Группировка и сортировка сотрудников по отделам
+//
+// **Условие:**
+//
+// Дан список сотрудников: `record Employee(String name, String department, int salary) {}`
+//
+// Реализуйте метод: `Map<String, List<Employee>> groupAndSortByDepartment(List<Employee> employees)`
+//
+// Метод должен вернуть карту:
+//
+//        - ключ — название отдела (department)
+//        - значение — отсортированный список сотрудников по убыванию зарплаты
+//        - отделы без сотрудников должны быть исключены
+// **Требования:**
+//
+//        - Использовать Java 8+ Stream API
+//        - Не модифицировать исходный список сотрудников
+//        - Сортировка внутри каждого отдела — по убыванию salary
+//        - Результат — Map<String, List<Employee>>
+//        - Решение должно быть лаконичным и читаемым
 public class EmployeeGrouping {
 
     public static void main(String[] args) {

@@ -6,6 +6,14 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+// Есть список объектов класса `Person` со следующими свойствами:
+//
+//        - `name` (Имя человека, тип String).
+//        - `age` (Возраст, тип int).
+// Задача:
+//
+//        1. Отсортировать людей по возрасту по возрастанию.
+//        2. Сгруппировать их в Map, где ключ — возраст, а значение — список имён.
 public class PersonGrouper {
 
     public static void main(String[] args) {
