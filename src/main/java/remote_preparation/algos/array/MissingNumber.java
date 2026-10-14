@@ -1,5 +1,6 @@
 package remote_preparation.algos.array;
 
+// formula сумма первых n натуральных чисел: n * (n + 1) / 2;
 public class MissingNumber {
 
     public static void main(String[] args) {

@@ -6,20 +6,20 @@ import java.util.Map;
 public class LengthOfLongestSubstring {
 
     static int lengthOfLongestSubstring(String s) {
-        int[] cp = s.codePoints().toArray();
+        int[] arr = s.codePoints().toArray();
         Map<Integer, Integer> lastSeen = new HashMap<>();
 
         int left = 0;
         int maxLen = 0;
 
-        for (int right = 0; right < cp.length; right++) {
-            Integer prevIndex = lastSeen.get(cp[right]);
+        for (int right = 0; right < arr.length; right++) {
+            Integer prevIndex = lastSeen.get(arr[right]);
             if (prevIndex != null) {
                 // max — обязателен, см. пояснение выше про "abba"
                 left = Math.max(left, prevIndex + 1);
             }
 
-            lastSeen.put(cp[right], right);
+            lastSeen.put(arr[right], right);
             maxLen = Math.max(maxLen, right - left + 1);
         }
 
